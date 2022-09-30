@@ -1,0 +1,25 @@
+.Icon {
+    &-Settings {
+        display: grid;
+        place-items: center;
+
+        &_isExpanded {
+            transform: rotate(90deg);
+
+            path {
+                fill: var(--color-primary-content);
+            }
+        }
+
+        path {
+            fill: var(--color-primary-content);
+            transition: fill 0.2s;
+        }
+
+        &:hover {
+            path {
+                fill: var(--color-theme);
+            }
+        }
+    }
+}

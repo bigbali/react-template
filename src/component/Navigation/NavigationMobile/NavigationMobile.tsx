@@ -5,6 +5,7 @@ import { navigationMap } from '../Navigation';
 import { HamburgerMenuIcon } from 'Component/Icon';
 import NavigationItem from '../NavigationItem';
 import '../Navigation.style';
+import Settings from 'Component/Settings';
 
 const NavigationMobile = () => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -23,8 +24,8 @@ const NavigationMobile = () => {
     }, [isExpanded]);
 
     const Menu = isExpanded && keepRendered ? (
-        <div block="Navigation" elem="MobileMenuWrapper">
-            <nav>
+        <div block="Navigation" elem="MobileMenu">
+            <nav elem="Nav">
                 <h1 elem="MobileHeader">
                     Menu
                 </h1>
@@ -32,6 +33,9 @@ const NavigationMobile = () => {
                     {navigationMap.map(NavigationItem)}
                 </ul>
             </nav>
+            <div elem="SettingsWrapper">
+                <Settings />
+            </div>
         </div>
     ) : null;
 
