@@ -6,6 +6,8 @@ import {
     NotificationStatus,
 } from 'Component/Notifications/Notifications';
 
+type ShowNotificationPayload = Omit<INotification, 'id'>;
+
 /**
  * @returns a tuple containing a function to create a notification, and one to delete it.
  */
@@ -16,7 +18,7 @@ export const useNotification = () => {
      * Creates a new notification and adds it to the existing ones.
      * @return the ID of the created notification.
      */
-    const showNotification = ({ timeout = 5000, status = NotificationStatus.INFO, ...options }: INotification): string => {
+    const showNotification = ({ timeout = 5000, status = NotificationStatus.INFO, ...options }: ShowNotificationPayload): string => {
         console.log('show', { timeout, status, ...options });
         const id = UUIDV4();
 

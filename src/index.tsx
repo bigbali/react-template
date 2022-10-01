@@ -29,7 +29,6 @@ const App = () => {
     window.hide = hideNotification;
 
     useEffect(() => {
-        // @ts-ignore
         const id = showNotification({
             timeout: 10000,
             title: 'none',

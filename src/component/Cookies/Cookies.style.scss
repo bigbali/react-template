@@ -28,14 +28,22 @@
     &-CloseButton {
         width: fit-content;
         height: fit-content;
-        margin-inline-end: -4px;
-        padding: 4px;
+        margin-inline-end: -0.5rem;
+        padding: 0;
         border: none;
         background-color: transparent;
-        cursor: pointer;
+
+        >.Icon {
+            width: 2rem;
+            height: 2rem;
+
+            >svg>path {
+                fill: var(--color-white);
+            }
+        }
 
         &:hover {
-            path {
+            >.Icon>svg>path {
                 fill: var(--color-theme);
             }
         }

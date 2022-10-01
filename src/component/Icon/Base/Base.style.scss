@@ -3,4 +3,18 @@
     place-items: center;
     width: fit-content;
     height: fit-content;
+    padding: 0.5rem;
+    align-items: center;
+
+    >svg {
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+
+        >path {
+            fill: var(--color-primary-content);
+            transition: fill 0.2s;
+        }
+    }
 }

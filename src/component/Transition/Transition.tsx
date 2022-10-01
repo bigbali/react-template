@@ -10,15 +10,15 @@ export const Transition = ({ classNames, ...props }: CSSTransitionProps) => {
 
         if (typeof classNames === 'string') {
             return {
-                appear: `${classNames}-in`,
-                appearActive: `${classNames}-in-active`,
-                appearDone: `${classNames}-in-done`,
-                enter: `${classNames}-enter`,
-                enterActive: `${classNames}-enter-active`,
-                enterDone: `${classNames}-enter-done`,
-                exit: `${classNames}-out`,
-                exitActive: `${classNames}-out-active`,
-                exitDone: `${classNames}-out-done`,
+                appear: `${classNames}_in`,
+                appearActive: `${classNames}_in-active`,
+                appearDone: `${classNames}_in-done`,
+                enter: `${classNames}_enter`,
+                enterActive: `${classNames}_enter-active`,
+                enterDone: `${classNames}_enter-done`,
+                exit: `${classNames}_out`,
+                exitActive: `${classNames}_out-active`,
+                exitDone: `${classNames}_out-done`,
             };
         }
 
@@ -28,9 +28,8 @@ export const Transition = ({ classNames, ...props }: CSSTransitionProps) => {
     })();
 
     return (
-        <CSSTransition {...props as CSSTransitionProps}
-            in
-            appear
+        <CSSTransition
+            {...props as CSSTransitionProps}
             classNames={__classNames__}
         />
     );

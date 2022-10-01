@@ -6,11 +6,11 @@
     flex-direction: column-reverse;
     align-items: center;
     height: fit-content;
-    z-index: 99;
+    z-index: 98;
     padding: 1rem;
-    // transform: translateY(-100%);
-    // opacity: 0;
-    // transition: all 0.2s;
+    max-height: 0;
+    min-height: 100px;
+    transition: max-height 0.2s, min-height 0.2s;
 
     .Notification {
         position: relative;
@@ -19,13 +19,15 @@
         justify-content: start;
         width: fit-content;
         min-width: 25%;
-        padding-block: 1rem;
-        padding-inline: 2rem;
-        border-radius: 0.75rem;
-        border: 1px solid;
+        padding: 1rem;
         margin-top: 1rem;
+        border: 1px solid;
+        border-radius: 0.75rem;
         overflow: hidden;
-        background-color: var(--color-primary-background);
+        background-color: var(--color-primary-background-transparent);
+        backdrop-filter: blur(10px);
+        transition: opacity 0.2s, translate 0.2s;
+        transition-timing-function: ease-out;
 
         &::before {
             content: "";
@@ -33,10 +35,7 @@
             position: absolute;
             inset-block-start: 0;
             inset-inline: 0;
-            // background-color: blue;
             height: 0.5rem;
-            // border-radius: 0.75rem 0.75rem 0 0;
-            // z-index: -1;
         }
 
         &_INFO {
@@ -57,114 +56,60 @@
 
         &_INFO::before {
             background-color: var(--color-neutral-background);
-            // color: var(--color-neutral-foreground);
         }
 
         &_SUCCESS::before {
             background-color: var(--color-success-background);
-            // color: var(--color-success-foreground);
         }
 
         &_WARNING::before {
             background-color: var(--color-warning-background);
-            // color: var(--color-warning-foreground);
         }
 
         &_ERROR::before {
             background-color: var(--color-error-background);
-            // color: var(--color-error-foreground);
         }
 
-        &-Content {}
+        &-Content {
+            width: 100%;
+        }
 
         &-Close {
             margin-inline-start: auto;
-        }
-    }
-
-    &.visible:not(.fading) {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-
-    p {
-        width: fit-content;
-
-        @include mobile {
-            width: 100%;
-            text-align: center;
-        }
-    }
-
-    .Icon {
-        width: 40px;
-        height: 40px;
-        padding: 8px;
-        display: flex;
-        align-items: center;
-
-        svg {
+            background: none;
+            border: none;
+            width: fit-content;
+            height: fit-content;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            margin: 0;
+            translate: 0.5rem 0;
+
+            >.Icon {
+                width: 2rem;
+                height: 2rem;
+            }
         }
 
-        // margin: 8px;
+        &-Title {
+            margin-block: 0;
+        }
+
+        &-Message {
+            margin-block: 0.5rem 0;
+        }
+
+        &_enter {
+            translate: 0 10rem;
+            opacity: 0;
+        }
+
+        &_enter-active {
+            opacity: 1;
+            translate: 0 0;
+        }
+
+        &_out-active {
+            translate: 0 -2rem;
+            // opacity: 0;
+        }
     }
-
-
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // padding-inline: 32px;
-    // padding-block: 8px;
-    // position: absolute;
-    // top: var(--header-height);
-    // inset-inline: 0;
-    // opacity: 0;
-    // pointer-events: none;
-    // transform: translateY(var(--header-height));
-    // transition: opacity 0.2s, transform 0.2s;
-
-    // @include mobile {
-    //     background-color: var(--color-success-background);
-    //     color: var(--color-success-foreground);
-    // }
-
-    // p {
-    //     margin-block: 0;
-    //     opacity: 0;
-    // }
-
-    // &_isExpanded {
-    //     opacity: 1;
-    //     pointer-events: all;
-    //     transform: translateY(0);
-
-    //     p {
-    //         opacity: 1;
-    //     }
-    // }
-
-    // &_informative {
-    //     background-color: var(--color-neutral-background);
-    //     color: var(--color-neutral-foreground);
-    // }
-
-    // &_success {
-    //     background-color: var(--color-success-background);
-    //     color: var(--color-success-foreground);
-    // }
-
-    // &_warning {
-    //     background-color: var(--color-warning-background);
-    //     color: var(--color-warning-foreground);
-    // }
-
-    // &_error {
-    //     background-color: var(--color-error-background);
-    //     color: var(--color-error-foreground);
-    // }
 }
