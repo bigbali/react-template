@@ -3,9 +3,12 @@ import { v4 as UUIDV4 } from 'uuid';
 import {
     type INotification,
     NotificationContext,
-    NotificationStatus
-} from 'Component/Notification/Notification';
+    NotificationStatus,
+} from 'Component/Notifications/Notifications';
 
+/**
+ * @returns a tuple containing a function to create a notification, and one to delete it.
+ */
 export const useNotification = () => {
     const [notificationContext, updateNotificationContext] = useContext(NotificationContext);
 
@@ -20,10 +23,10 @@ export const useNotification = () => {
         updateNotificationContext([
             ...notificationContext,
             {
+                ...options,
                 timeout,
                 status,
-                id,
-                ...options
+                id
             }
         ]);
 
@@ -31,10 +34,10 @@ export const useNotification = () => {
     };
 
     /**
-     * Remove a notification.
+     * Removes a notification by ID.
      * @param notificationId the ID returned by `showNotification`.
      */
-    const hideNotification = (notificationId: INotification['id']) => {
+    const hideNotification = (notificationId: string) => {
         updateNotificationContext(
             notificationContext.filter(({ id }) => notificationId !== id)
         );
@@ -43,7 +46,7 @@ export const useNotification = () => {
     return [
         showNotification,
         hideNotification
-    ];
+    ] as const;
 };
 
 export default useNotification;

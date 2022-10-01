@@ -11,11 +11,11 @@ import ErrorPage from 'Route/Error';
 import ExamplePage from 'Route/Example';
 import IndexPage from 'Route/IndexPage';
 import Header from 'Component/Header';
-import Notification from 'Component/Notification';
+import Notifications from 'Component/Notifications';
 import Cookies from 'Component/Cookies';
 // import X from 'Component/X';
 import 'Style/main.scss';
-import { NotificationContext, NotificationContextProvider } from 'Component/Notification/Notification';
+import { NotificationContext, NotificationContextProvider } from 'Component/Notifications/Notifications';
 import { useNotification } from 'Util';
 import { NotificationStatus } from 'Store/notification';
 import { useEffect } from 'react';
@@ -48,7 +48,7 @@ const App = () => {
         <Router>
             {/* <X /> */}
             <Header />
-            <Notification />
+            <Notifications />
             <Cookies />
             <Routes>
                 <Route path='/'
