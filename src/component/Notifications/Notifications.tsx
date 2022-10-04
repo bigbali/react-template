@@ -1,22 +1,15 @@
 import {
     createContext,
-    createRef,
     Dispatch,
-    LegacyRef,
     PropsWithChildren,
-    Ref,
     SetStateAction,
     useContext,
-    useEffect,
-    useRef,
     useState
 } from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useNotification } from 'Util';
 import { CloseIcon } from 'Component/Icon';
-import Transition from 'Component/Transition/Transition';
 import './Notifications.style.scss';
-import { TransitionGroup } from 'react-transition-group';
-import React from 'react';
 
 export enum NotificationStatus {
     INFO = 'INFO',
@@ -26,11 +19,14 @@ export enum NotificationStatus {
 };
 
 export interface INotification {
-    status?: NotificationStatus,
-    title?: string,
-    message?: string,
-    timeout?: number,
-    id: string
+    status: NotificationStatus,
+    title: string,
+    message: string,
+    id: string,
+    timeout: {
+        id: NodeJS.Timeout,
+        duration: number
+    }
 };
 
 export const NotificationContext =
@@ -43,108 +39,51 @@ export const NotificationContextProvider = ({ children }: PropsWithChildren) => 
     );
 };
 
-const Notification = (
-    {
-        notification,
-        hideNotification,
-        forwardRef
-    }: {
-        notification: INotification,
-        hideNotification: (id: string) => void
-        forwardRef: LegacyRef<HTMLDivElement>
-    }
-) => {
-    const { title, message, status, id } = notification;
-    // const [state, setState] = useState(true);
-
-    // useEffect(() => {
-    //     return () => setState(false);
-    // }, []);
-
-    // INVESTIGATE
-    // if this block is moved into Transition below, BEM attribute processing breaks
-    return (
-        <div
-            ref={forwardRef}
-            block="Notification"
-            mods={{
-                INFO: status === NotificationStatus.INFO,
-                SUCCESS: status === NotificationStatus.SUCCESS,
-                WARNING: status === NotificationStatus.WARNING,
-                ERROR: status === NotificationStatus.ERROR
-            }}
-        >
-            <div elem="Content">
-                <h3 elem="Title">
-                    {title}
-                </h3>
-                <p elem="Message">
-                    {message}
-                </p>
-            </div>
-            <button
-                elem="Close"
-                onClick={() => {
-                    console.log(id);
-                    hideNotification(id);
-                }}>
-                <CloseIcon />
-            </button>
-        </div>
-    );
-};
-
-export const NotificationContainer = () => {
+export const Notifications = () => {
     const [notificationContext] = useContext(NotificationContext);
     const [, hideNotification] = useNotification();
-    const [count, setCount] = useState(notificationContext.length);
+    const [containerRef] = useAutoAnimate<HTMLDivElement>({
+        duration: 100
+    });
 
-    const decr = () => { // this shit actually is useless!
-        if (notificationContext.length > 0) setCount(notificationContext.length - 1);
-    };
-
-    useEffect(() => {
-        setCount(notificationContext.length);
-    }, [notificationContext]);
-
-    // if (!notificationContext.length) return null;
-    // todo tell style when element got removed before ccstransition takes effect
-
-
-    const notifications = notificationContext.map((notification, index) => {
-        const ref = createRef<any>();
+    // Instead of creating a notification component and mapping that, we map directly
+    // because this way the animations work better
+    const notifications = notificationContext.map(({ title, message, status, id }) => {
         return (
-            <Transition
-                nodeRef={ref}
-                classNames="Notification"
-                timeout={{
-                    enter: 200,
-                    exit: 200
+            <div
+                key={id}
+                block="Notification"
+                mods={{
+                    INFO: status === NotificationStatus.INFO,
+                    SUCCESS: status === NotificationStatus.SUCCESS,
+                    WARNING: status === NotificationStatus.WARNING,
+                    ERROR: status === NotificationStatus.ERROR
                 }}
-                key={notification.id}
-                in
-                appear
-                onExited={() => { decr(); console.log('exited'); }}>
-                <Notification
-                    notification={notification}
-                    hideNotification={hideNotification}
-                    key={index}
-                    forwardRef={ref} />
-            </Transition>
+            >
+                <div elem="Content">
+                    <h3 elem="Title">
+                        {title}
+                    </h3>
+                    <p elem="Message">
+                        {message}
+                    </p>
+                </div>
+                <button
+                    elem="Close"
+                    onClick={() => {
+                        hideNotification(id);
+                    }}>
+                    <CloseIcon />
+                </button>
+            </div>
         );
     });
 
     return (
-        <TransitionGroup
-            block="NotificationContainer"
-            style={{
-                maxHeight: `calc(${(count * 70) + (count * 16)}px + 2rem)`,
-                minHeight: `calc(${count * 70 + count * 16}px + 2rem)`
-            }}
-        >
+        <div block="NotificationContainer" ref={containerRef}>
             {notifications}
-        </TransitionGroup>
+        </div>
     );
 };
 
-export default NotificationContainer;
+export default Notifications;

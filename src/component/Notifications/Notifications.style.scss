@@ -5,18 +5,16 @@
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
+    justify-content: flex-end;
     height: fit-content;
     z-index: 98;
     padding: 1rem;
-    max-height: 0;
-    min-height: 100px;
-    transition: max-height 0.2s, min-height 0.2s;
 
     .Notification {
         position: relative;
         display: flex;
         flex-direction: row;
-        justify-content: start;
+        justify-content: flex-start;
         width: fit-content;
         min-width: 25%;
         padding: 1rem;
@@ -26,8 +24,8 @@
         overflow: hidden;
         background-color: var(--color-primary-background-transparent);
         backdrop-filter: blur(10px);
-        transition: opacity 0.2s, translate 0.2s;
-        transition-timing-function: ease-out;
+        height: 100px;
+        flex: none;
 
         &::before {
             content: "";
@@ -95,21 +93,6 @@
 
         &-Message {
             margin-block: 0.5rem 0;
-        }
-
-        &_enter {
-            translate: 0 10rem;
-            opacity: 0;
-        }
-
-        &_enter-active {
-            opacity: 1;
-            translate: 0 0;
-        }
-
-        &_out-active {
-            translate: 0 -2rem;
-            // opacity: 0;
         }
     }
 }

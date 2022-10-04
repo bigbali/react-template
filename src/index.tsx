@@ -1,4 +1,5 @@
 // import { StrictMode } from 'react';
+import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
     Route,
@@ -6,23 +7,23 @@ import {
     Routes
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from 'Store';
+import { useNotification } from 'Util';
 import ErrorPage from 'Route/Error';
 import ExamplePage from 'Route/Example';
 import IndexPage from 'Route/IndexPage';
+import store from 'Store';
 import Header from 'Component/Header';
-import Notifications from 'Component/Notifications';
 import Cookies from 'Component/Cookies';
-// import X from 'Component/X';
+import Notifications, {
+    NotificationContextProvider,
+    NotificationStatus
+} from 'Component/Notifications';
 import 'Style/main.scss';
-import { NotificationContext, NotificationContextProvider } from 'Component/Notifications/Notifications';
-import { useNotification } from 'Util';
-import { NotificationStatus } from 'Store/notification';
-import { useEffect } from 'react';
 
 const App = () => {
     const [showNotification, hideNotification] = useNotification();
 
+    // DEBUG
     // @ts-ignore
     window.show = showNotification;
     // @ts-ignore
@@ -35,17 +36,11 @@ const App = () => {
             message: 'yes',
             status: NotificationStatus.INFO
         });
-
-        setTimeout(() => {
-            // @ts-ignore
-            hideNotification(id);
-        }, 5000);
     }, []);
 
 
     return (
         <Router>
-            {/* <X /> */}
             <Header />
             <Notifications />
             <Cookies />
