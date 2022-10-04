@@ -2,12 +2,8 @@ import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { type CSSTransitionProps } from 'react-transition-group/CSSTransition';
 
-export const Transition = ({ classNames, ...props }: CSSTransitionProps) => {
+export const Transition = ({ classNames = 'element', ...props }: CSSTransitionProps) => {
     const __classNames__ = (() => {
-        if (!classNames) {
-            classNames = 'element';
-        }
-
         if (typeof classNames === 'string') {
             return {
                 appear: `${classNames}_in`,

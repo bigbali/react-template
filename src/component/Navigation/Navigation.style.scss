@@ -131,8 +131,6 @@
             }
 
             &.previouslyactive {
-
-                // TODO: bug -> reselect item then click on another -> no fade out anim
                 &:not(.active) {
 
                     // Prevent animation when reselecting item
@@ -177,23 +175,37 @@
         }
     }
 
-    &-MobileMenuWrapper {
+    &-Mobile {
         position: fixed;
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
         z-index: 1000;
         inset: 0;
         width: 100%;
         height: 100vh;
-        background-color: rgba(0, 0, 0, 0.50);
 
-        nav {
-            position: absolute;
-            inset-block: 0;
-            inset-inline-start: 0;
+        &-Menu {
+            flex: 0.75;
             border-inline-end: 1px solid rgba(128, 128, 128, 0.75);
-            height: 100%;
             width: 75%;
             padding: var(--content-padding);
             background-color: var(--color-primary-background);
+
+            &-Exit {
+                display: flex;
+                justify-content: center;
+                flex: 0.25;
+                padding-block-start: 2rem;
+
+                >.Icon {
+                    width: 3rem;
+
+                    >svg>path {
+                        fill: var(--color-white);
+                    }
+                }
+            }
         }
 
         &:before {
@@ -205,6 +217,21 @@
             width: 100%;
             height: 100%;
             backdrop-filter: blur(24px);
+            background-color: rgba(0, 0, 0, 0.50);
+        }
+
+        &_enter {
+            opacity: 0;
+        }
+
+        &_enter-active {
+            opacity: 1;
+            transition: opacity 0.2s;
+        }
+
+        &-exit-active {
+            opacity: 0;
+            transition: opacity 0.2s;
         }
     }
 

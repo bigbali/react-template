@@ -16,19 +16,18 @@ export const SettingsOverlay = () => {
     // language
     // increased readability: increase font sizes and contrast => replace px units with em and set font size on body
 
+    // return (
+    //     <div>
+    //         <Icon.Settings
+    //             isExpanded={isExpanded}
+    //             onClick={toggleIsExpanded} />
+    //         <div>
+    //             SettingsOverlay
+    //         </div>
+    //     </div>
+    // );
 
-    // todo: create hook to allow animation on conditionally rendered component
-
-    return (
-        <div>
-            <Icon.Settings
-                isExpanded={isExpanded}
-                onClick={toggleIsExpanded} />
-            <div>
-                SettingsOverlay
-            </div>
-        </div>
-    );
+    return null;
 };
 
 export default SettingsOverlay;
