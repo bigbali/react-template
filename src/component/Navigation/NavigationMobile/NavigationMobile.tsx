@@ -30,7 +30,10 @@ const NavigationMobile = () => {
             <Transition
                 in
                 appear
-                timeout={200}
+                timeout={{
+                    enter: 200,
+                    exit: 100
+                }}
                 nodeRef={ref}
                 classNames="Navigation-Mobile"
             >

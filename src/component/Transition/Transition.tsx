@@ -12,9 +12,9 @@ export const Transition = ({ classNames = 'element', ...props }: CSSTransitionPr
                 enter: `${classNames}_enter`,
                 enterActive: `${classNames}_enter-active`,
                 enterDone: `${classNames}_enter-done`,
-                exit: `${classNames}_out`,
-                exitActive: `${classNames}_out-active`,
-                exitDone: `${classNames}_out-done`,
+                exit: `${classNames}_exit`,
+                exitActive: `${classNames}_exit-active`,
+                exitDone: `${classNames}_exit-done`,
             };
         }
 
