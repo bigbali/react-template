@@ -5,7 +5,7 @@ export { default as HamburgerMenuIcon } from './HamburgerMenuIcon';
 import { default as Base } from './Base';
 import { default as CloseIcon } from './CloseIcon';
 import { default as HamburgerMenuIcon } from './HamburgerMenuIcon';
-import { default as Settings } from './Settings';
+import { default as Settings } from './SettingsIcon';
 
 const Icon = {
     Base,
