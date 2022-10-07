@@ -1,9 +1,8 @@
-import { HTMLAttributes, SVGAttributes, SVGProps } from 'react';
-import type { IconProps } from '../index';
+import { SVGProps } from 'react';
 import Icon from '../index';
 import './Settings.style';
 
-export const Settings = ({ fill, isExpanded, ...props }: SVGProps<SVGSVGElement> & { isExpanded: boolean }) => {
+export const Settings = ({ fill, ...props }: SVGProps<SVGSVGElement> & { isExpanded: boolean }) => {
     return (
         <Icon.Base>
             <svg

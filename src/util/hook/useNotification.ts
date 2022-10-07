@@ -55,13 +55,19 @@ export const useNotification = () => {
      * @param notificationId the ID returned by `showNotification`.
      */
     const hideNotification = useCallback((notificationId: string) => {
+        if (!notificationId) return;
+
         // remove notification and clear the timeout
         updateNotificationContext((context) => {
             // get the id an duration properties of the notification that matches the provided ID
-            const [{ timeout: { id, duration } }] = context.filter(({ id }) => id === notificationId);
+            const notification = context.filter(({ id }) => id === notificationId);
 
-            if (duration !== 0) { // ...then use them to clear the timeout
-                clearTimeout(id);
+            if (notification.length !== 0) {
+                const { timeout: { id, duration } } = notification[0];
+
+                if (duration !== 0) { // ...then use them to clear the timeout
+                    clearTimeout(id);
+                }
             }
 
             return context.filter(({ id }) => notificationId !== id);

@@ -1,4 +1,4 @@
-// import { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
@@ -12,9 +12,11 @@ import {
     useDevice,
     useNotification
 } from 'Util';
-import ErrorPage from 'Route/Error';
-import ExamplePage from 'Route/Example';
 import IndexPage from 'Route/IndexPage';
+import AboutPage from 'Route/AboutPage';
+import ContactPage from 'Route/ContactPage';
+import ExamplePage from 'Route/Example';
+import ErrorPage from 'Route/Error';
 import store from 'Store';
 import Header from 'Component/Header';
 import Cookies from 'Component/Cookies';
@@ -22,11 +24,9 @@ import Notifications, {
     NotificationContextProvider,
     NotificationStatus
 } from 'Component/Notifications';
-import 'Style/main.scss';
-import { SwitchTransition, TransitionGroup } from 'react-transition-group';
+import { SwitchTransition } from 'react-transition-group';
 import Transition from 'Component/Transition/Transition';
-import AboutPage from 'Route/AboutPage';
-import ContactPage from 'Route/ContactPage';
+import 'Style/main.scss';
 
 const App = () => {
     const location = useLocation();
@@ -52,7 +52,7 @@ const App = () => {
             <Cookies />
             <SwitchTransition>
                 <Transition
-                    onEntered={() => {
+                    onEntered={() => { // when transitioning, prevent scrollbars
                         document.querySelector('body')!.classList.remove('disable-scrolling');
                     }}
                     onExit={() => {
@@ -84,14 +84,14 @@ const App = () => {
 
 const root = createRoot(document.getElementById('root')!);
 root.render(
-    // <StrictMode>
-    <Provider store={store}>
-        <NotificationContextProvider>
-            <Router>
-                <App />
-            </Router>
-        </NotificationContextProvider>
-    </Provider>
-    // </StrictMode>
+    <StrictMode>
+        <Provider store={store}>
+            <NotificationContextProvider>
+                <Router>
+                    <App />
+                </Router>
+            </NotificationContextProvider>
+        </Provider>
+    </StrictMode>
 );
 

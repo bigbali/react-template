@@ -1,33 +1,32 @@
-import Icon from 'Component/Icon';
-import { useState } from 'react';
+// import Icon from 'Component/Icon';
+// import { useState } from 'react';
 
-export const SettingsOverlay = () => {
-    const [isExpanded, setIsExpanded] = useState(false);
+// export const SettingsOverlay = () => {
+//     const [isExpanded, setIsExpanded] = useState(false);
 
-    const toggleIsExpanded = () => {
-        setIsExpanded(!isExpanded);
-    };
-    // settings in global store
-    // usesettings hook
-    // on mobile put in nav menu, on desktop is overlay with button
-    // => on desktop, do as with navmenu on mobile => use portal
-    // dark / light mode
-    // mobile ? navigation position bottom or top
-    // language
-    // increased readability: increase font sizes and contrast => replace px units with em and set font size on body
+//     const toggleIsExpanded = () => {
+//         setIsExpanded(!isExpanded);
+//     };
+//     // settings in global store
+//     // usesettings hook
+//     // => on desktop, use portal?
+//     // dark / light mode
+//     // mobile ? navigation position bottom or top
+//     // language
+//     // increased readability: increase font sizes and contrast => replace px units with em and set font size on body
 
-    // return (
-    //     <div>
-    //         <Icon.Settings
-    //             isExpanded={isExpanded}
-    //             onClick={toggleIsExpanded} />
-    //         <div>
-    //             SettingsOverlay
-    //         </div>
-    //     </div>
-    // );
+//     // return (
+//     //     <div>
+//     //         <Icon.Settings
+//     //             isExpanded={isExpanded}
+//     //             onClick={toggleIsExpanded} />
+//     //         <div>
+//     //             SettingsOverlay
+//     //         </div>
+//     //     </div>
+//     // );
 
-    return null;
-};
+//     return null;
+// };
 
-export default SettingsOverlay;
+// export default SettingsOverlay;

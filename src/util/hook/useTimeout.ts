@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react';
 
-export const useTimer = () => {
+export const useTimeout = () => {
     const _timeoutId = useRef<NodeJS.Timeout | null>(null);
 
     const _timeout = useCallback((callback: () => void, timeout: number) => {
@@ -17,4 +17,4 @@ export const useTimer = () => {
     return [_timeout, _cleanup] as const;
 };
 
-export default useTimer;
+export default useTimeout;
