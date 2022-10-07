@@ -3,6 +3,7 @@ import {
     useEffect,
     useRef
 } from 'react';
+import { useLocation } from 'react-router';
 import { TransitionGroup } from 'react-transition-group';
 import {
     CloseIcon,
@@ -15,6 +16,7 @@ import '../Navigation.style';
 
 const NavigationMobile = () => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const location = useLocation();
     const ref = useRef(null);
 
     useEffect(() => {
@@ -24,6 +26,11 @@ const NavigationMobile = () => {
             document.querySelector('body')!.classList.remove('disable-scrolling');
         }
     }, [isExpanded]);
+
+    useEffect(() => { // when we click on a navigation item, close the menu, but first wait for the animations
+        const id = setTimeout(() => setIsExpanded(false), 300);
+        return () => clearTimeout(id);
+    }, [location]);
 
     const Menu = (
         isExpanded && (
@@ -47,9 +54,6 @@ const NavigationMobile = () => {
                                 {navigationMap.map(NavigationItem)}
                             </ul>
                         </nav>
-                        {/* <div elem="SettingsWrapper">
-                            <Settings />
-                        </div> */}
                     </div>
                     <div elem="Mobile-Menu-Exit" onClick={() => setIsExpanded(false)}>
                         <CloseIcon />
@@ -59,7 +63,7 @@ const NavigationMobile = () => {
         )
     );
 
-    // can we get this to work with portal?
+    // can we get this to work with portal? conditional rendering?
     // const MenuPortal = createPortal(Menu, document.querySelector('#root')!);
 
     return (

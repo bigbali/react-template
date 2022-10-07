@@ -46,7 +46,65 @@ body {
 }
 
 main {
-    margin-block-start: var(--header-height);
+    padding-block-start: var(--header-height);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &::before {
+        content: "";
+        display: block;
+        position: fixed;
+        inset: 0;
+        background-color: var(--color-primary-background-transparent);
+        backdrop-filter: blur(0.5rem);
+        opacity: 0;
+    }
+
+    &.cross-page {
+        &_enter {
+            @include desktop {
+                scale: 1.2;
+            }
+
+            &::before {
+                opacity: 1;
+            }
+        }
+
+        &_exit {
+            scale: 1;
+
+            &::before {
+                opacity: 0;
+            }
+        }
+
+        &_enter-active {
+            scale: 1;
+            transition: scale 0.2s;
+            transition-timing-function: ease-out;
+
+            &::before {
+                opacity: 0;
+                transition: opacity 0.2s;
+                transition-timing-function: ease-out;
+            }
+        }
+
+        &_exit-active {
+            @include desktop {
+                scale: 1.2;
+                transition: scale 0.1s;
+                transition-timing-function: ease-out;
+            }
+
+            &::before {
+                opacity: 1;
+                transition: opacity 0.1s;
+                transition-timing-function: ease-out;
+            }
+        }
+    }
 }
 
 button {

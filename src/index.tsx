@@ -4,10 +4,14 @@ import { createRoot } from 'react-dom/client';
 import {
     Route,
     BrowserRouter as Router,
-    Routes
+    Routes,
+    useLocation
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { useNotification } from 'Util';
+import {
+    useDevice,
+    useNotification
+} from 'Util';
 import ErrorPage from 'Route/Error';
 import ExamplePage from 'Route/Example';
 import IndexPage from 'Route/IndexPage';
@@ -19,40 +23,62 @@ import Notifications, {
     NotificationStatus
 } from 'Component/Notifications';
 import 'Style/main.scss';
+import { SwitchTransition, TransitionGroup } from 'react-transition-group';
+import Transition from 'Component/Transition/Transition';
+import AboutPage from 'Route/AboutPage';
+import ContactPage from 'Route/ContactPage';
 
 const App = () => {
-    const [showNotification, hideNotification] = useNotification();
-
-    // DEBUG
-    // @ts-ignore
-    window.show = showNotification;
-    // @ts-ignore
-    window.hide = hideNotification;
+    const location = useLocation();
+    const [showNotification] = useNotification();
+    const { isMobile } = useDevice();
 
     useEffect(() => {
-        const id = showNotification({
-            timeout: 10000,
-            title: 'none',
-            message: 'yes',
+        showNotification({
+            timeout: 5000,
+            title: 'Hey',
+            message: `We believe you are browsing this page from a ${isMobile
+                ? 'mobile'
+                : 'desktop'}
+            device. That is very cool!`,
             status: NotificationStatus.INFO
         });
-    }, []);
-
+    }, [isMobile]);
 
     return (
-        <Router>
+        <>
             <Header />
             <Notifications />
             <Cookies />
-            <Routes>
-                <Route path='/'
-                    element={<IndexPage />} />
-                <Route path='/example/:?id'
-                    element={<ExamplePage />} />
-                <Route path='*'
-                    element={<ErrorPage />} />
-            </Routes>
-        </Router>
+            <SwitchTransition>
+                <Transition
+                    onEntered={() => {
+                        document.querySelector('body')!.classList.remove('disable-scrolling');
+                    }}
+                    onExit={() => {
+                        document.querySelector('body')!.classList.add('disable-scrolling');
+                    }}
+                    key={location.key}
+                    classNames="cross-page"
+                    timeout={{
+                        enter: 200,
+                        exit: 100
+                    }}>
+                    <Routes location={location}>
+                        <Route path='/'
+                            element={<IndexPage />} />
+                        <Route path='about'
+                            element={<AboutPage />} />
+                        <Route path='contact'
+                            element={<ContactPage />} />
+                        <Route path='/example/:?id'
+                            element={<ExamplePage />} />
+                        <Route path='*'
+                            element={<ErrorPage />} />
+                    </Routes>
+                </Transition>
+            </SwitchTransition>
+        </>
     );
 };
 
@@ -61,7 +87,9 @@ root.render(
     // <StrictMode>
     <Provider store={store}>
         <NotificationContextProvider>
-            <App />
+            <Router>
+                <App />
+            </Router>
         </NotificationContextProvider>
     </Provider>
     // </StrictMode>

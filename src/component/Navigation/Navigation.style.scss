@@ -4,10 +4,6 @@
     margin-inline-start: auto;
     height: 100%;
 
-    @include mobile {
-        display: block;
-    }
-
     &-List {
         display: flex;
         margin-block: auto;

@@ -1,0 +1,27 @@
+.ContactPage {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+
+    &-MainContent {
+        margin-top: calc(-3 * var(--header-height));
+        padding-inline: var(--content-padding);
+    }
+
+    &-Header {
+        margin-block: 0;
+        font-size: 4rem;
+    }
+
+    &-Subheader {
+        margin-block: 0;
+        font-size: 2.5rem;
+    }
+
+    &-List {
+        font-size: 1.5rem;
+        list-style: none;
+        padding-inline-start: 0.5rem;
+        margin-block-start: 0;
+    }
+}
