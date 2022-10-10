@@ -2,12 +2,15 @@ import { StrictMode } from 'react';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+    useLocation,
+    createBrowserRouter,
+    createRoutesFromElements,
     Route,
-    BrowserRouter as Router,
-    Routes,
-    useLocation
+    RouterProvider,
+    Outlet
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { SwitchTransition } from 'react-transition-group';
 import {
     useDevice,
     useNotification
@@ -15,8 +18,9 @@ import {
 import IndexPage from 'Route/IndexPage';
 import AboutPage from 'Route/AboutPage';
 import ContactPage from 'Route/ContactPage';
-import ExamplePage from 'Route/Example';
-import ErrorPage from 'Route/Error';
+import ErrorPage from 'Route/ErrorPage';
+import ExamplePage from 'Route/ExamplePage';
+import NotFoundPage from 'Route/NotFoundPage';
 import store from 'Store';
 import Header from 'Component/Header';
 import Cookies from 'Component/Cookies';
@@ -24,11 +28,10 @@ import Notifications, {
     NotificationContextProvider,
     NotificationStatus
 } from 'Component/Notifications';
-import { SwitchTransition } from 'react-transition-group';
-import Transition from 'Component/Transition/Transition';
+import Transition from 'Component/Transition';
 import 'Style/main.scss';
 
-const App = () => {
+const Layout = () => {
     const location = useLocation();
     const [showNotification] = useNotification();
     const { isMobile } = useDevice();
@@ -64,32 +67,38 @@ const App = () => {
                         enter: 200,
                         exit: 100
                     }}>
-                    <Routes location={location}>
-                        <Route path='/'
-                            element={<IndexPage />} />
-                        <Route path='about'
-                            element={<AboutPage />} />
-                        <Route path='contact'
-                            element={<ContactPage />} />
-                        <Route path='/example/:?id'
-                            element={<ExamplePage />} />
-                        <Route path='*'
-                            element={<ErrorPage />} />
-                    </Routes>
+                    <Outlet />
                 </Transition>
             </SwitchTransition>
         </>
     );
 };
 
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route element={<Layout />}>
+            <Route errorElement={<ErrorPage />}>
+                <Route path='/'
+                    element={<IndexPage />} />
+                <Route path='about'
+                    element={<AboutPage />} />
+                <Route path='contact'
+                    element={<ContactPage />} />
+                <Route path='example/:id'
+                    element={<ExamplePage />} />
+                <Route path='*'
+                    element={<NotFoundPage />} />
+            </Route>
+        </Route>
+    )
+);
+
 const root = createRoot(document.getElementById('root')!);
 root.render(
     <StrictMode>
         <Provider store={store}>
             <NotificationContextProvider>
-                <Router>
-                    <App />
-                </Router>
+                <RouterProvider router={router} />
             </NotificationContextProvider>
         </Provider>
     </StrictMode>

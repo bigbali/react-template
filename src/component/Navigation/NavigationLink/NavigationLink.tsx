@@ -50,13 +50,13 @@ export const NavigationLink = forwardRef<HTMLAnchorElement, NavLinkProps & Navig
         : undefined;
 
     const className = (typeof classNameProp === 'function')
-        ? classNameProp({ isActive })
+        ? classNameProp({ isActive, isPending: false })
         : [classNameProp, isActive ? 'active' : null]
             .filter(Boolean)
             .join(' ');
 
     const style = typeof styleProp === 'function'
-        ? styleProp({ isActive })
+        ? styleProp({ isActive, isPending: false })
         : styleProp;
 
     if (onActive && isActive && previouslyActive.current === false) {
@@ -89,7 +89,7 @@ export const NavigationLink = forwardRef<HTMLAnchorElement, NavLinkProps & Navig
         >
             {
                 typeof children === 'function'
-                    ? children({ isActive })
+                    ? children({ isActive, isPending: false })
                     : children
             }
         </Link>

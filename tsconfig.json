@@ -52,6 +52,8 @@
         }
     },
     "exclude": [
-        "*.config.js"
+        "*.config.js",
+        "build",
+        "node_modules"
     ]
 }
