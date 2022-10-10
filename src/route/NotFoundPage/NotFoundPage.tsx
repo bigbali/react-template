@@ -2,7 +2,7 @@ import './NotFoundPage.style';
 
 export const NotFoundPage = () => {
     return (
-        <main block="NotFoundPage">
+        <div block="NotFoundPage">
             <div elem="MainContent">
                 <h1 elem="Header">
                     We couldn't find the page you are looking for.
@@ -11,7 +11,7 @@ export const NotFoundPage = () => {
                     Please make sure you got the right address.
                 </h2>
             </div>
-        </main>
+        </div>
     );
 };
 

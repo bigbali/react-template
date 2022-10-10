@@ -1,13 +1,14 @@
-import { StrictMode } from 'react';
-import { useEffect } from 'react';
+import {
+    StrictMode,
+    useEffect,
+    createRef
+} from 'react';
 import { createRoot } from 'react-dom/client';
 import {
     useLocation,
     createBrowserRouter,
-    createRoutesFromElements,
-    Route,
     RouterProvider,
-    Outlet
+    useOutlet,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { SwitchTransition } from 'react-transition-group';
@@ -15,13 +16,12 @@ import {
     useDevice,
     useNotification
 } from 'Util';
+import store from 'Store';
 import IndexPage from 'Route/IndexPage';
 import AboutPage from 'Route/AboutPage';
 import ContactPage from 'Route/ContactPage';
 import ErrorPage from 'Route/ErrorPage';
 import ExamplePage from 'Route/ExamplePage';
-import NotFoundPage from 'Route/NotFoundPage';
-import store from 'Store';
 import Header from 'Component/Header';
 import Cookies from 'Component/Cookies';
 import Notifications, {
@@ -31,10 +31,46 @@ import Notifications, {
 import Transition from 'Component/Transition';
 import 'Style/main.scss';
 
+const routes = [
+    {
+        path: '/',
+        name: 'Home',
+        element: <IndexPage />,
+        nodeRef: createRef<any>()
+    },
+    {
+        path: 'about',
+        name: 'About',
+        element: <AboutPage />,
+        nodeRef: createRef<any>()
+    },
+    {
+        path: 'contact',
+        element: <ContactPage />,
+        nodeRef: createRef<any>(),
+    },
+    {
+        path: 'example/:id',
+        name: 'Example',
+        element: < ExamplePage />,
+        nodeRef: createRef<any>(),
+    },
+    {
+        path: '*',
+        name: 'Contact',
+        element: <ContactPage />,
+        nodeRef: createRef<any>(),
+    }
+];
+
 const Layout = () => {
     const location = useLocation();
     const [showNotification] = useNotification();
     const { isMobile } = useDevice();
+    const currentOutlet = useOutlet();
+    const { nodeRef } = routes.find(
+        (route) => route.path === location.pathname
+    ) ?? {};
 
     useEffect(() => {
         showNotification({
@@ -55,43 +91,48 @@ const Layout = () => {
             <Cookies />
             <SwitchTransition>
                 <Transition
+                    unmountOnExit
                     onEntered={() => { // when transitioning, prevent scrollbars
                         document.querySelector('body')!.classList.remove('disable-scrolling');
                     }}
                     onExit={() => {
                         document.querySelector('body')!.classList.add('disable-scrolling');
                     }}
-                    key={location.key}
+                    key={location.key} // @ts-ignore
+                    nodeRef={nodeRef}
                     classNames="cross-page"
                     timeout={{
-                        enter: 200,
+                        enter: 300,
                         exit: 100
                     }}>
-                    <Outlet />
+                    {() => (
+                        <main ref={nodeRef} block="Page">
+                            {currentOutlet}
+                        </main>
+                    )}
                 </Transition>
             </SwitchTransition>
         </>
     );
 };
 
-const router = createBrowserRouter(
-    createRoutesFromElements(
-        <Route element={<Layout />}>
-            <Route errorElement={<ErrorPage />}>
-                <Route path='/'
-                    element={<IndexPage />} />
-                <Route path='about'
-                    element={<AboutPage />} />
-                <Route path='contact'
-                    element={<ContactPage />} />
-                <Route path='example/:id'
-                    element={<ExamplePage />} />
-                <Route path='*'
-                    element={<NotFoundPage />} />
-            </Route>
-        </Route>
-    )
-);
+const router = createBrowserRouter([
+    {
+        path: undefined,
+        element: <Layout />,
+        children: [
+            {
+                path: undefined,
+                errorElement: <ErrorPage />,
+                children: routes.map((route) => ({
+                    index: route.path === '/',
+                    path: route.path === '/' ? undefined : route.path,
+                    element: route.element
+                }))
+            }
+        ]
+    }
+]);
 
 const root = createRoot(document.getElementById('root')!);
 root.render(

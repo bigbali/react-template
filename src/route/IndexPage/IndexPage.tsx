@@ -2,7 +2,7 @@ import './IndexPage.style.scss';
 
 export const IndexPage = () => {
     return (
-        <main block="IndexPage">
+        <div block="IndexPage">
             <div elem="MainContent">
                 <h1 elem="Header">
                     React Template
@@ -11,7 +11,7 @@ export const IndexPage = () => {
                     built with TypeScript
                 </h2>
             </div>
-        </main>
+        </div>
     );
 };
 

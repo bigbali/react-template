@@ -1,7 +1,9 @@
 import { useParams } from 'react-router';
+import { usePageTransitionRef } from 'Util';
 import './ExamplePage.style';
 
 export const ExamplePage = () => {
+    const ref = usePageTransitionRef();
     const { id } = useParams();
 
     if (!id?.match(/\d/)) {
@@ -9,7 +11,7 @@ export const ExamplePage = () => {
     }
 
     return (
-        <main block="ExamplePage">
+        <main block="ExamplePage" ref={ref}>
             <div elem="MainContent">
                 <h1 elem="Header">
                     Your identifier is

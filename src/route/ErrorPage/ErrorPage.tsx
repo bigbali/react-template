@@ -2,7 +2,7 @@ import './ErrorPage.style';
 
 export const ErrorPage = () => {
     return (
-        <main block="NotFoundPage">
+        <div block="NotFoundPage" >
             <div elem="MainContent">
                 <h1 elem="Header">
                     There's a fly in the soup
@@ -11,7 +11,7 @@ export const ErrorPage = () => {
                     Something's not right. It looks like we've caught an error!
                 </h2>
             </div>
-        </main>
+        </div>
     );
 };
 

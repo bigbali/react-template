@@ -2,7 +2,7 @@ import './ContactPage.style.scss';
 
 export const ContactPage = () => {
     return (
-        <main block="ContactPage" style={{ backgroundImage: 'url(https://tinypng.com/images/social/website.jpg)' }}>
+        <div block="ContactPage" style={{ backgroundImage: 'url(https://tinypng.com/images/social/website.jpg)' }}>
             <div elem="MainContent">
                 <h1 elem="Header">
                     contact
@@ -22,7 +22,7 @@ export const ContactPage = () => {
                     </li>
                 </ul>
             </div>
-        </main>
+        </div>
     );
 };
 
