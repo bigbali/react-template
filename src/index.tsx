@@ -34,13 +34,11 @@ import 'Style/main.scss';
 const routes = [
     {
         path: '/',
-        name: 'Home',
         element: <IndexPage />,
         nodeRef: createRef<any>()
     },
     {
         path: 'about',
-        name: 'About',
         element: <AboutPage />,
         nodeRef: createRef<any>()
     },
@@ -51,13 +49,11 @@ const routes = [
     },
     {
         path: 'example/:id',
-        name: 'Example',
         element: < ExamplePage />,
         nodeRef: createRef<any>(),
     },
     {
         path: '*',
-        name: 'Contact',
         element: <ContactPage />,
         nodeRef: createRef<any>(),
     }
@@ -76,10 +72,7 @@ const Layout = () => {
         showNotification({
             timeout: 5000,
             title: 'Hey',
-            message: `We believe you are browsing this page from a ${isMobile
-                ? 'mobile'
-                : 'desktop'}
-            device. That is very cool!`,
+            message: `We believe you are browsing this page from a ${isMobile ? 'mobile' : 'desktop'} device. That is very cool!`,
             status: NotificationStatus.INFO
         });
     }, [isMobile]);
@@ -91,14 +84,13 @@ const Layout = () => {
             <Cookies />
             <SwitchTransition>
                 <Transition
-                    unmountOnExit
                     onEntered={() => { // when transitioning, prevent scrollbars
                         document.querySelector('body')!.classList.remove('disable-scrolling');
                     }}
                     onExit={() => {
                         document.querySelector('body')!.classList.add('disable-scrolling');
                     }}
-                    key={location.key} // @ts-ignore
+                    key={location.key}
                     nodeRef={nodeRef}
                     classNames="cross-page"
                     timeout={{
@@ -118,17 +110,17 @@ const Layout = () => {
 
 const router = createBrowserRouter([
     {
-        path: undefined,
         element: <Layout />,
         children: [
-            {
-                path: undefined,
+            { // this is our error boundary
                 errorElement: <ErrorPage />,
-                children: routes.map((route) => ({
-                    index: route.path === '/',
-                    path: route.path === '/' ? undefined : route.path,
-                    element: route.element
-                }))
+                children: routes.map(
+                    route => ({
+                        index: route.path === '/',
+                        path: route.path === '/' ? undefined : route.path,
+                        element: route.element
+                    })
+                )
             }
         ]
     }

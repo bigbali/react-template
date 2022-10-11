@@ -2,9 +2,10 @@
     &-HamburgerMenu {
         display: grid;
         place-items: center;
+        transition: rotate 0.2s;
 
         &_isExpanded {
-            transform: rotate(90deg);
+            rotate: 90deg;
 
             path {
                 fill: var(--color-primary-content);

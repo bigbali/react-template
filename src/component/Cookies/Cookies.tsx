@@ -43,9 +43,7 @@ export const Cookies = () => {
                     {tapOrClick} here to read about our Cookie Policy.
                 </Link>
             </div>
-
         </div>
-
     );
 };
 

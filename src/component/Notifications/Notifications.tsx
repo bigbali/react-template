@@ -80,7 +80,11 @@ export const Notifications = () => {
     });
 
     return (
-        <div block="NotificationContainer" ref={containerRef}>
+        <div
+            block="NotificationContainer"
+            ref={containerRef}
+            mods={{ NO_CONTENT: notificationContext.length === 0 }}
+        >
             {notifications}
         </div>
     );

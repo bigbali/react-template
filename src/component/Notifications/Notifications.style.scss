@@ -10,6 +10,10 @@
     z-index: 98;
     padding: 1rem;
 
+    &_NO_CONTENT {
+        display: none;
+    }
+
     .Notification {
         position: relative;
         display: flex;

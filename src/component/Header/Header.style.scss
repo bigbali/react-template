@@ -13,7 +13,7 @@
     position: fixed;
     inset-block-start: 0;
     inset-inline: 0;
-    padding-inline: calc(var(--content-padding) + 16px);
+    padding-inline: calc(var(--content-padding) + 1rem);
     z-index: 99;
     height: var(--header-height);
     backdrop-filter: blur(10px);
@@ -45,7 +45,11 @@
 
     &-Branding {
         margin-block: auto;
-        font-size: 24px;
+        font-size: 1.5rem;
         font-weight: 400;
+
+        @include mobile {
+            font-size: 1.2rem;
+        }
     }
 }
