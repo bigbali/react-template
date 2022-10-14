@@ -22,6 +22,7 @@ import IndexPage from 'Route/IndexPage';
 import AboutPage from 'Route/AboutPage';
 import ContactPage from 'Route/ContactPage';
 import ErrorPage from 'Route/ErrorPage';
+import NotFoundPage from 'Route/NotFoundPage';
 import ExamplePage from 'Route/ExamplePage';
 import Header from 'Component/Header';
 import Cookies from 'Component/Cookies';
@@ -56,7 +57,7 @@ const routes = [
     },
     {
         path: '*',
-        element: <ContactPage />,
+        element: <NotFoundPage />,
         nodeRef: createRef<any>(),
     }
 ];
@@ -82,12 +83,17 @@ const Layout = () => {
 
     useEffect(() => {
         const body = document.querySelector('body')!;
+        const html = document.querySelector('html')!;
+
         if (theme === Theme.LIGHT) {
             body.classList.replace('theme-dark', 'theme-light') || body.classList.add('theme-light');
         }
         else {
             body.classList.replace('theme-light', 'theme-dark') || body.classList.add('theme-dark');
         }
+
+        html.style.fontSize = `${16 * (fontSizeOverride || 1)}px`;
+
     }, [theme, themeColorOverride, fontSizeOverride]);
 
     return (

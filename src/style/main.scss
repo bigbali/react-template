@@ -10,6 +10,8 @@
     --color-background-primary-dark: rgb(30, 30, 35);
     --color-background-primary-dark-transparent: rgba(30, 30, 35, 0.75);
 
+    --color-background-primary-dark-transparent-less-transparent: rgba(30, 30, 35, 0.9);
+
     --color-background-secondary-light: rgb(238, 241, 247);
     --color-background-secondary-light-transparent: rgba(238, 241, 247, 0.75);
     --color-background-secondary-dark: rgb(35, 35, 40);
@@ -48,12 +50,13 @@
     --color-error-background: rgb(212, 46, 46);
     --color-error-foreground: var(--color-white);
 
-    --content-padding: 32px;
-    --header-height: 60px;
+    --content-padding: 2rem;
+    --header-height: 3.75rem;
+    --blur-background: 16px;
 
     @include mobile {
-        --content-padding: 24px;
-        --header-height: 40px;
+        --content-padding: 1.5rem;
+        --header-height: 2.5rem;
     }
 }
 
@@ -92,14 +95,14 @@
 ::after {
     box-sizing: border-box;
     color: var(--color-content-primary);
-    transition: color 0.2s, background-color 0.2s;
+    transition: color 0.2s, background-color 0.2s, font-size 0.1s;
+    font-family: $raleway;
 }
 
 body,
 .root {
     margin: 0;
     background-color: var(--color-background-primary);
-    font-family: $raleway;
     min-height: 100vh;
 }
 
@@ -107,6 +110,16 @@ body {
     &.disable-scrolling {
         overflow: hidden;
     }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    word-break: break-word;
 }
 
 main {

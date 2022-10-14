@@ -4,8 +4,8 @@
     inset-inline: 0;
     width: 100%;
     padding-bottom: 32px;
-    background-color: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(24px);
+    background-color: var(--color-background-primary-dark-transparent-less-transparent);
+    backdrop-filter: blur(var(--blur-background));
     z-index: 98;
 
     &-Header {
@@ -13,9 +13,9 @@
         align-items: center;
         padding-block: 4px;
         padding-inline: var(--content-padding);
-        font-size: 20px;
+        font-size: 1.25rem;
         background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-        color: var(--color-white);
+        color: var(--color-content-primary-dark);
         border-block-start: 1px solid rgba(255, 255, 255, 0.25);
         border-block-end: 1px solid rgba(255, 255, 255, 0.15);
     }
@@ -39,7 +39,7 @@
             height: 2rem;
 
             >svg>path {
-                fill: var(--color-white);
+                fill: var(--color-content-primary-dark);
             }
         }
 
@@ -51,23 +51,26 @@
     }
 
     &-Body {
-        font-size: 16px;
+        font-size: 1rem;
         padding-block: 8px;
         padding-inline: var(--content-padding);
-        color: var(--color-white);
-        line-height: 24px;
+        color: var(--color-content-primary-dark);
+        line-height: 1.5rem;
     }
 
     &-CookiePolicy {
-        padding-inline: 8px;
+        display: block;
+        width: fit-content;
+        padding-inline: 0.5rem;
+        margin-block-start: 1rem;
+        border-radius: 50vmin;
         text-decoration: none;
         background-color: var(--color-theme);
-        color: var(--color-white);
-        border-radius: 50vmin;
+        color: var(--color-content-primary-dark);
         transition: background-color 0.2s, color 0.2s;
 
         &:hover {
-            background-color: var(--color-white);
+            background-color: var(--color-content-primary-dark);
             color: var(--color-theme);
         }
     }

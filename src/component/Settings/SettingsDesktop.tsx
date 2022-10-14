@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { HamburgerMenuIcon, SettingsIcon } from 'Component/Icon';
 import { useSettings } from 'Util';
 import { Theme } from 'Store';
 import Switch from 'Component/Switch';
+import Slider from 'Component/Slider';
+import {
+    MoonIcon,
+    SettingsIcon,
+    SunIcon
+} from 'Component/Icon';
 import './Settings.style';
 
 
@@ -10,8 +15,13 @@ export const SettingsDesktop = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [settings, actions] = useSettings();
 
-    const handleThemeSwitch = (newTheme: Theme) => {
-        actions.setTheme(newTheme);
+    const handleThemeSwitch = (theme: Theme) => {
+        actions.setTheme(theme);
+    };
+
+    const handleFontSizeOverride = (modifier: number) => {
+        console.log(modifier);
+        actions.setFontSizeOverride(modifier);
     };
 
     // => on desktop, use portal?
@@ -34,12 +44,21 @@ export const SettingsDesktop = () => {
                     onSwitch={handleThemeSwitch}
                     valueLeft={Theme.LIGHT}
                     valueRight={Theme.DARK}
-                    iconLeft={<HamburgerMenuIcon isExpanded={false} />}
-                    iconRight={<SettingsIcon isExpanded={false} />}
+                    iconLeft={<SunIcon />}
+                    iconRight={<MoonIcon />}
                     textLeft='Light'
                     textRight='Dark'
                     label='Color Scheme'
                     initiallySelectRight={settings.theme === Theme.DARK}
+                />
+                <Slider
+                    onChange={(e) => handleFontSizeOverride(Number.parseFloat(e.currentTarget.value))}
+                    min={1}
+                    max={1.4}
+                    step={0.1}
+                    name='fontsize-override'
+                    label='Font Size'
+                    defaultValue={settings.fontSizeOverride}
                 />
             </div>
         </div>

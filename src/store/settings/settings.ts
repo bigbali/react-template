@@ -19,7 +19,7 @@ const initialState: Settings = {
 
         if (fso === null) return fso;
 
-        return Number.parseInt(fso);
+        return Number.parseFloat(fso);
     })(),
 };
 
@@ -37,6 +37,10 @@ export const settingsSlice = createSlice({
         setTheme: (state, { payload }: PayloadAction<Theme>) => {
             localStorage.setItem('theme', payload);
             state.theme = payload;
+        },
+        setFontSizeOverride: (state, { payload }: PayloadAction<number>) => {
+            localStorage.setItem('font_size_override', payload.toString());
+            state.fontSizeOverride = payload;
         }
     }
 });

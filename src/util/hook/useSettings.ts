@@ -8,7 +8,8 @@ import store, {
 export const useSettings = () => {
     const settings = useSelector(state => state.settings);
     const actions = {
-        setTheme: (theme: Theme) => store.dispatch(settingsSlice.actions.setTheme(theme))
+        setTheme: (theme: Theme) => store.dispatch(settingsSlice.actions.setTheme(theme)),
+        setFontSizeOverride: (modifier: number) => store.dispatch(settingsSlice.actions.setFontSizeOverride(modifier))
     };
 
     return [settings, actions] as const;
