@@ -7,12 +7,12 @@
             transform: rotate(90deg);
 
             path {
-                fill: var(--color-primary-content);
+                fill: var(--color-content-primary);
             }
         }
 
         path {
-            fill: var(--color-primary-content);
+            fill: var(--color-content-primary);
             transition: fill 0.2s;
         }
 

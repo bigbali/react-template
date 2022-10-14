@@ -1,0 +1,53 @@
+.Settings {
+    &-Desktop {
+        &-Expander {
+            border: none;
+            background-color: transparent;
+            padding: 0;
+
+            &>.Icon {
+                width: 2.75rem;
+                height: 2.75rem;
+                margin-inline-start: 1rem;
+            }
+        }
+
+        &-Overlay {
+            position: fixed;
+            inset-block-start: calc(var(--header-height) + 1rem);
+            inset-inline-end: calc(var(--content-padding) + 1rem); // + 1rem, as header is offset negatively
+            padding-inline: 1rem;
+            padding-block: 0.5rem 1rem;
+            background-color: var(--color-background-primary-transparent);
+            backdrop-filter: blur(0.5rem);
+            border: 1px solid var(--color-theme-transparent);
+            pointer-events: none;
+            opacity: 0;
+            scale: 0.85;
+            translate: 0 2rem;
+            transition-timing-function: ease-in;
+            transition: opacity 0.2s,
+                translate 0.2s,
+                scale 0.2s;
+        }
+
+        &-SettingsLabel {
+            margin-block-start: 0;
+            margin-block-end: 1.5rem;
+            padding-block-end: 1rem;
+            font-size: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--color-secondary-background);
+        }
+
+        &_isExpanded {
+            >.Settings-Desktop-Overlay {
+                opacity: 1;
+                pointer-events: all;
+                translate: 0 0;
+                scale: 1;
+                transition-timing-function: ease-out;
+            }
+        }
+    }
+}

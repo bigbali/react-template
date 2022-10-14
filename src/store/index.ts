@@ -1,9 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer as deviceReducer } from 'Store/device';
+import deviceSlice from './device/device';
+import settingsSlice from './settings/settings';
+
+export * from './device/device';
+export * from './settings/settings';
 
 export const store = configureStore({
     reducer: {
-        device: deviceReducer
+        device: deviceSlice.reducer,
+        settings: settingsSlice.reducer
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

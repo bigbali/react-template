@@ -1,18 +1,18 @@
 import { useDevice } from 'Util';
 import Navigation from 'Component/Navigation/Navigation';
 import './Header.style';
+import SettingsDesktop from 'Component/Settings';
 
 export const Header = () => {
-    const { isMobile } = useDevice();
-
-    const label = isMobile ? 'Template: Mobile' : 'Template: Desktop';
+    const { isDesktop } = useDevice();
 
     return (
         <div block="Header">
             <h1 elem="Branding">
-                {label}
+                Template
             </h1>
             <Navigation />
+            {isDesktop && <SettingsDesktop />}
         </div>
     );
 };

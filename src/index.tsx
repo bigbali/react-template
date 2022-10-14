@@ -14,9 +14,10 @@ import { Provider } from 'react-redux';
 import { SwitchTransition } from 'react-transition-group';
 import {
     useDevice,
-    useNotification
+    useNotification,
+    useSettings
 } from 'Util';
-import store from 'Store';
+import store, { Theme } from 'Store';
 import IndexPage from 'Route/IndexPage';
 import AboutPage from 'Route/AboutPage';
 import ContactPage from 'Route/ContactPage';
@@ -31,6 +32,7 @@ import Notifications, {
 import Transition from 'Component/Transition';
 import 'Style/main.scss';
 
+const rootElement = document.getElementById('root')!;
 const routes = [
     {
         path: '/',
@@ -63,6 +65,7 @@ const Layout = () => {
     const location = useLocation();
     const [showNotification] = useNotification();
     const { isMobile } = useDevice();
+    const [{ theme, themeColorOverride, fontSizeOverride }] = useSettings();
     const currentOutlet = useOutlet();
     const { nodeRef } = routes.find(
         (route) => route.path === location.pathname
@@ -76,6 +79,16 @@ const Layout = () => {
             status: NotificationStatus.INFO
         });
     }, [isMobile]);
+
+    useEffect(() => {
+        const body = document.querySelector('body')!;
+        if (theme === Theme.LIGHT) {
+            body.classList.replace('theme-dark', 'theme-light') || body.classList.add('theme-light');
+        }
+        else {
+            body.classList.replace('theme-light', 'theme-dark') || body.classList.add('theme-dark');
+        }
+    }, [theme, themeColorOverride, fontSizeOverride]);
 
     return (
         <>
@@ -126,7 +139,7 @@ const router = createBrowserRouter([
     }
 ]);
 
-const root = createRoot(document.getElementById('root')!);
+const root = createRoot(rootElement);
 root.render(
     <StrictMode>
         <Provider store={store}>

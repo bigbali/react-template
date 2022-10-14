@@ -15,7 +15,6 @@ export const CloseIcon = ({ color }: IconProps) => {
                 />
             </svg>
         </div>
-
     );
 };
 

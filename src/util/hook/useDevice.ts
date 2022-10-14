@@ -1,7 +1,7 @@
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { useSelector } from 'Util';
-import { actions as deviceActions } from 'Store/device';
+import { deviceSlice } from 'Store';
 import store from 'Store';
 
 const WINDOW_SIZE_UPDATE_DELAY_MS = 100;
@@ -11,7 +11,7 @@ fromEvent(window, 'resize')
         debounceTime(WINDOW_SIZE_UPDATE_DELAY_MS),
     )
     .subscribe(() => {
-        store.dispatch(deviceActions.update());
+        store.dispatch(deviceSlice.actions.update());
     });
 
 export const useDevice = () => {

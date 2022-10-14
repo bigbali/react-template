@@ -26,5 +26,4 @@ export const deviceSlice = createSlice({
     }
 });
 
-export const { actions, reducer, getInitialState } = deviceSlice;
-export const { update } = deviceSlice.actions;
+export default deviceSlice;

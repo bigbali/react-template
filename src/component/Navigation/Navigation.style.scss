@@ -45,7 +45,7 @@
             background-position: top;
             transition: background-size 0.2s ease-out,
                 color 0.3s ease-out;
-            color: var(--color-primary-content);
+            color: var(--color-content-primary);
             border-radius: 32px;
             position: relative;
 
@@ -166,7 +166,7 @@
 
         svg {
             path {
-                fill: var(--color-primary-content);
+                fill: var(--color-content-primary);
             }
         }
     }
@@ -186,7 +186,7 @@
             border-inline-end: 1px solid rgba(128, 128, 128, 0.75);
             width: 75%;
             padding: var(--content-padding);
-            background-color: var(--color-primary-background);
+            background-color: var(--color-background-primary);
             z-index: 999;
 
             &-Exit {

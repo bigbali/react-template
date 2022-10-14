@@ -4,6 +4,7 @@ export { useInterval } from './hook/useInterval';
 export { useTimeout } from './hook/useTimeout';
 export { usePageTransitionRef } from './hook/usePageTransitionRef';
 export { useRenderCount } from './hook/useRenderCount';
+export { useSettings } from './hook/useSettings';
 
 
 export { useDispatch } from './hook/useDispatch';

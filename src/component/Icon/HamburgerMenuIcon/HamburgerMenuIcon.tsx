@@ -6,7 +6,6 @@ export const HamburgerMenuIcon = ({ color, isExpanded }: IconProps & { isExpande
         <div block="Icon" elem="HamburgerMenu" mods={{ isExpanded }}>
             <svg
                 viewBox="0 0 72 48"
-                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <path
