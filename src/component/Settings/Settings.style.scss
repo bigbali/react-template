@@ -45,6 +45,8 @@
             }
 
             &>.Slider {
+                margin-block-end: 1.5rem;
+
                 &>.Slider {
                     &-Input {
                         width: 12.5rem;
@@ -64,6 +66,44 @@
             font-size: 1.5rem;
             text-align: center;
             border-bottom: 1px solid var(--color-border);
+        }
+
+        &-ColorPicker {
+            display: flex;
+            justify-content: space-between;
+
+            &-ColorsContainer {
+                display: flex;
+                flex: auto;
+                justify-content: space-between;
+                width: 12.5rem;
+                max-width: 12.5rem;
+
+                &>button {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    border: none;
+                }
+
+                &>.DefaultColor {
+                    background-color: var(--color-theme-initial);
+
+                    &.Outline {
+                        outline: 3px solid var(--color-border);
+                    }
+                }
+            }
+
+        }
+
+        &-ColorLabel {
+            display: flex;
+            align-items: center;
+            margin-inline-start: auto;
+            margin-block: 0;
+            font-weight: 500;
+            font-size: 1rem; // turns out, setting font-size explicitly removes turd looking animation
+            user-select: none;
         }
 
         &_isExpanded {

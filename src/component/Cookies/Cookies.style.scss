@@ -66,7 +66,9 @@
         border-radius: 50vmin;
         text-decoration: none;
         background-color: var(--color-theme);
-        color: var(--color-content-primary-dark);
+        color: var(--color-white); // since background is colored, content-primary might not provide enough contrast
+        font-weight: 500;
+        letter-spacing: 0.2px;
         transition: background-color 0.2s, color 0.2s;
 
         &:hover {

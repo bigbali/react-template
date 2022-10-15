@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useSettings } from 'Util';
-import { Theme } from 'Store';
+import {
+    Color,
+    DefaultColors,
+    Theme
+} from 'Store';
 import Switch from 'Component/Switch';
 import Slider from 'Component/Slider';
 import {
@@ -10,6 +14,10 @@ import {
 } from 'Component/Icon';
 import './Settings.style';
 
+const ColorMap = [
+    null,
+    ...Object.values(DefaultColors)
+];
 
 export const SettingsDesktop = () => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -19,15 +27,46 @@ export const SettingsDesktop = () => {
         actions.setTheme(theme);
     };
 
+    const handleThemeColorOverride = (color: Color) => {
+        actions.setThemeColorOverride(color);
+    };
+
     const handleFontSizeOverride = (modifier: number) => {
-        console.log(modifier);
         actions.setFontSizeOverride(modifier);
     };
 
-    // => on desktop, use portal?
-    // mobile ? navigation position bottom or top
-    // language
-    // increased readability: increase font sizes and contrast => replace px units with em and set font size on body
+    const getOutlineStyle = useCallback((color: Color) => { // when we have the default selected, null === null,
+        if (settings.themeColorOverride === color           // but when we select another color, that is an object,
+            || (color && settings.themeColorOverride        // therefore between page reloads their reference will change
+                && (color.value === settings.themeColorOverride.value))) { // -> so we compare their values, not their references
+            return `4px solid${getComputedStyle(document.body)
+                .getPropertyValue(`--color-border-${settings.theme === Theme.LIGHT
+                    ? 'dark'
+                    : 'light'}`
+                )}`;
+        }
+    }, [settings, actions]);
+
+    const colorMapper = (color: Color) => {
+        if (color === null) {
+            return (
+                <button
+                    className='DefaultColor'
+                    onClick={() => handleThemeColorOverride(null)}
+                    title='Default (Red)'
+                    style={{ outline: getOutlineStyle(null) }}
+                />
+            );
+        }
+
+        return (
+            <button
+                style={{ backgroundColor: color.value, outline: getOutlineStyle(color) }}
+                onClick={() => handleThemeColorOverride(color)}
+                title={color.name}
+            />
+        );
+    };
 
     return (
         <div block='Settings-Desktop' mods={{ isExpanded }}>
@@ -60,8 +99,16 @@ export const SettingsDesktop = () => {
                     label='Font Size'
                     defaultValue={settings.fontSizeOverride}
                 />
+                <div elem='ColorPicker'>
+                    <div elem='ColorPicker-ColorsContainer'>
+                        {ColorMap.map(colorMapper)}
+                    </div>
+                    <p elem='ColorLabel'>
+                        Accent Color
+                    </p>
+                </div>
             </div>
-        </div>
+        </div >
     );
 };
 

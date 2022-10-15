@@ -27,8 +27,8 @@
     --color-content-secondary-dark: rgb(220, 225, 230);
     --color-content-secondary-dark-transparent: rgba(220, 225, 230, 0.75);
 
-    --color-theme: rgb(204, 18, 18);
-    --color-theme-transparent: rgba(204, 18, 18, 0.5);
+    --color-theme-initial: rgb(204, 18, 18);
+    --color-theme: var(--color-theme-initial);
 
     --color-border-light: rgb(225, 225, 235);
     --color-border-light-transparent: rgba(225, 225, 235, 0.75);

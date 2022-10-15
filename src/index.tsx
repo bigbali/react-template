@@ -34,6 +34,9 @@ import Transition from 'Component/Transition';
 import 'Style/main.scss';
 
 const rootElement = document.getElementById('root')!;
+const body = document.querySelector('body')!;
+const html = document.querySelector('html')!;
+
 const routes = [
     {
         path: '/',
@@ -82,14 +85,18 @@ const Layout = () => {
     }, [isMobile]);
 
     useEffect(() => {
-        const body = document.querySelector('body')!;
-        const html = document.querySelector('html')!;
-
         if (theme === Theme.LIGHT) {
             body.classList.replace('theme-dark', 'theme-light') || body.classList.add('theme-light');
         }
         else {
             body.classList.replace('theme-light', 'theme-dark') || body.classList.add('theme-dark');
+        }
+
+        if (themeColorOverride) {
+            body.style.setProperty('--color-theme', themeColorOverride.value);
+        }
+        else {
+            body.style.removeProperty('--color-theme');
         }
 
         html.style.fontSize = `${16 * (fontSizeOverride || 1)}px`;
