@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useSettings } from 'Util';
 import {
     Color,
@@ -9,7 +9,6 @@ import Switch from 'Component/Switch';
 import Slider from 'Component/Slider';
 import {
     MoonIcon,
-    SettingsIcon,
     SunIcon
 } from 'Component/Icon';
 import './Settings.style';
@@ -19,8 +18,7 @@ const ColorMap = [
     ...Object.values(DefaultColors)
 ];
 
-export const SettingsDesktop = () => {
-    const [isExpanded, setIsExpanded] = useState(false);
+export const SettingsMobile = () => {
     const [settings, actions] = useSettings();
 
     const handleThemeSwitch = (theme: Theme) => {
@@ -48,7 +46,6 @@ export const SettingsDesktop = () => {
     }, [settings, actions]);
 
     const colorMapper = (color: Color) => {
-        console.log(getOutlineStyle(color));
         if (color === null) {
             return (
                 <button
@@ -72,47 +69,40 @@ export const SettingsDesktop = () => {
     };
 
     return (
-        <div block='Settings-Desktop' mods={{ isExpanded }}>
-            <button
-                elem='Expander'
-                onClick={() => setIsExpanded((state) => !state)}>
-                <SettingsIcon isExpanded={isExpanded} />
-            </button>
-            <div elem='Overlay'>
-                <p elem='SettingsLabel'>
-                    Settings
-                </p>
-                <Switch
-                    onSwitch={handleThemeSwitch}
-                    valueLeft={Theme.LIGHT}
-                    valueRight={Theme.DARK}
-                    iconLeft={<SunIcon />}
-                    iconRight={<MoonIcon />}
-                    textLeft='Light'
-                    textRight='Dark'
-                    label='Color Scheme'
-                    initiallySelectRight={settings.theme === Theme.DARK}
-                />
-                <Slider
-                    onChange={(e) => handleFontSizeOverride(Number.parseFloat(e.currentTarget.value))}
-                    min={1}
-                    max={1.4}
-                    step={0.1}
-                    name='fontsize-override'
-                    label='Font Size'
-                    defaultValue={settings.fontSizeOverride}
-                />
-                <div elem='ColorPicker'>
-                    <div elem='ColorPicker-ColorsContainer'>
-                        {ColorMap.map(colorMapper)}
-                    </div>
-                    <p elem='ColorLabel'>
-                        Accent Color
-                    </p>
+        <div block='Settings-Mobile'>
+            <p elem='SettingsLabel'>
+                Settings
+            </p>
+            <Switch
+                onSwitch={handleThemeSwitch}
+                valueLeft={Theme.LIGHT}
+                valueRight={Theme.DARK}
+                iconLeft={<SunIcon />}
+                iconRight={<MoonIcon />}
+                textLeft='Light'
+                textRight='Dark'
+                label='Color Scheme'
+                initiallySelectRight={settings.theme === Theme.DARK}
+            />
+            <Slider
+                onChange={(e) => handleFontSizeOverride(Number.parseFloat(e.currentTarget.value))}
+                min={1}
+                max={1.4}
+                step={0.1}
+                name='fontsize-override'
+                label='Font Size'
+                defaultValue={settings.fontSizeOverride}
+            />
+            <div elem='ColorPicker'>
+                <div elem='ColorPicker-ColorsContainer'>
+                    {ColorMap.map(colorMapper)}
                 </div>
+                <p elem='ColorLabel'>
+                    Accent Color
+                </p>
             </div>
         </div >
     );
 };
 
-export default SettingsDesktop;
+export default SettingsMobile;

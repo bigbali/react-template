@@ -13,6 +13,7 @@ import Transition from 'Component/Transition/Transition';
 import { navigationMap } from '../Navigation';
 import NavigationItem from '../NavigationItem';
 import '../Navigation.style';
+import Settings from 'Component/Settings';
 
 const NavigationMobile = () => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -42,20 +43,23 @@ const NavigationMobile = () => {
                     exit: 100
                 }}
                 nodeRef={ref}
-                classNames="Navigation-Mobile"
+                classNames='Navigation-Mobile'
             >
-                <div block="Navigation" elem="Mobile" ref={ref}>
-                    <div elem="Mobile-Menu">
-                        <nav elem="Nav">
-                            <h1 elem="MobileHeader">
+                <div block='Navigation' elem='Mobile' ref={ref}>
+                    <div elem='Mobile-Menu'>
+                        <nav elem='Nav'>
+                            <h1 elem='MobileHeader'>
                                 Menu
                             </h1>
-                            <ul elem="List">
+                            <ul elem='List'>
                                 {navigationMap.map(NavigationItem)}
                             </ul>
                         </nav>
+                        <div elem='Settings'>
+                            <Settings.Mobile />
+                        </div>
                     </div>
-                    <div elem="Mobile-Menu-Exit" onClick={() => setIsExpanded(false)}>
+                    <div elem='Mobile-Menu-Exit' onClick={() => setIsExpanded(false)}>
                         <CloseIcon />
                     </div>
                 </div>
@@ -69,8 +73,8 @@ const NavigationMobile = () => {
     return (
         <TransitionGroup component={null}>
             <div
-                block="Navigation"
-                elem="HamburgerIconWrapper"
+                block='Navigation'
+                elem='HamburgerIconWrapper'
                 onClick={() => setIsExpanded((state) => !state)}
             >
                 <HamburgerMenuIcon isExpanded={isExpanded} />

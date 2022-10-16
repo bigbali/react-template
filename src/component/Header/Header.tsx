@@ -1,7 +1,7 @@
 import { useDevice } from 'Util';
 import Navigation from 'Component/Navigation/Navigation';
+import Settings from 'Component/Settings';
 import './Header.style';
-import SettingsDesktop from 'Component/Settings';
 
 export const Header = () => {
     const { isDesktop } = useDevice();
@@ -12,7 +12,7 @@ export const Header = () => {
                 Template
             </h1>
             <Navigation />
-            {isDesktop && <SettingsDesktop />}
+            {isDesktop && <Settings.Desktop />}
         </div>
     );
 };

@@ -30,8 +30,6 @@ const Switch = ({
         ? valueRight
         : valueLeft);
 
-    console.log(value);
-
     const onClick = useCallback(() => {
         const newValue = value === valueLeft ? valueRight : valueLeft;
         onSwitch(newValue);
