@@ -1,4 +1,9 @@
-import { useCallback, useState } from 'react';
+import {
+    useCallback,
+    useMemo,
+    useState
+} from 'react';
+import lodash from 'lodash';
 import { useSettings } from 'Util';
 import {
     Color,
@@ -27,18 +32,22 @@ export const SettingsDesktop = () => {
         actions.setTheme(theme);
     };
 
-    const handleThemeColorOverride = (color: Color) => {
-        actions.setThemeColorOverride(color);
+    const handleChangeAccentColor = (color: Color) => {
+        actions.setAccentColor(color);
     };
 
-    const handleFontSizeOverride = (modifier: number) => {
-        actions.setFontSizeOverride(modifier);
+    const handleChangeFontSize = useMemo(() => {
+        return lodash.debounce((modifier: number) => actions.setFontSize(modifier), 300);
+    }, []);
+
+    const handleChangeContrast = (modifier: number) => {
+        actions.setContrast(modifier);
     };
 
     const getOutlineStyle = useCallback((color: Color) => { // when we have the default selected, null === null,
-        if (settings.themeColorOverride === color           // but when we select another color, that is an object,
-            || (color && settings.themeColorOverride        // therefore between page reloads their reference will change
-                && (color.value === settings.themeColorOverride.value))) { // -> so we compare their values, not their references
+        if (settings.accentColor === color           // but when we select another color, that is an object,
+            || (color && settings.accentColor        // therefore between page reloads their reference will change
+                && (color.value === settings.accentColor.value))) { // -> so we compare their values, not their references
             return `4px solid ${getComputedStyle(document.body)
                 .getPropertyValue(`--color-border-${settings.theme === Theme.LIGHT
                     ? 'dark'
@@ -48,13 +57,12 @@ export const SettingsDesktop = () => {
     }, [settings, actions]);
 
     const colorMapper = (color: Color) => {
-        console.log(getOutlineStyle(color));
         if (color === null) {
             return (
                 <button
                     key='defaultcolor'
                     className='DefaultColor'
-                    onClick={() => handleThemeColorOverride(null)}
+                    onClick={() => handleChangeAccentColor(null)}
                     title='Default (Red)'
                     style={{ outline: getOutlineStyle(null) }}
                 />
@@ -65,7 +73,7 @@ export const SettingsDesktop = () => {
             <button
                 key={color.name}
                 style={{ backgroundColor: color.value, outline: getOutlineStyle(color) }}
-                onClick={() => handleThemeColorOverride(color)}
+                onClick={() => handleChangeAccentColor(color)}
                 title={color.name}
             />
         );
@@ -91,16 +99,25 @@ export const SettingsDesktop = () => {
                     textLeft='Light'
                     textRight='Dark'
                     label='Color Scheme'
-                    initiallySelectRight={settings.theme === Theme.DARK}
+                    externalValue={settings.theme}
                 />
                 <Slider
-                    onChange={(e) => handleFontSizeOverride(Number.parseFloat(e.currentTarget.value))}
-                    min={1}
+                    onChange={(e) => handleChangeFontSize(Number.parseFloat(e.currentTarget.value))}
+                    min={0.6}
                     max={1.4}
-                    step={0.1}
-                    name='fontsize-override'
+                    step={0.01}
+                    name='fontsize'
                     label='Font Size'
-                    defaultValue={settings.fontSizeOverride}
+                    externalValue={settings.fontSize}
+                />
+                <Slider
+                    onChange={(e) => handleChangeContrast(Number.parseFloat(e.currentTarget.value))}
+                    min={0.8}
+                    max={1.2}
+                    step={0.01}
+                    name='contrast'
+                    label='Contrast'
+                    externalValue={settings.contrast}
                 />
                 <div elem='ColorPicker'>
                     <div elem='ColorPicker-ColorsContainer'>
@@ -110,6 +127,12 @@ export const SettingsDesktop = () => {
                         Accent Color
                     </p>
                 </div>
+                <button
+                    elem='Reset'
+                    onClick={() => actions.reset()}
+                >
+                    Reset
+                </button>
             </div>
         </div >
     );

@@ -40,30 +40,28 @@ export type Color = ColorType | null;
 
 export interface Settings {
     theme: Theme,
-    themeColorOverride: Color | null,
-    fontSizeOverride: number | null
+    accentColor: Color | null,
+    fontSize: number,
+    contrast: number
 }
 
-const initialState: Settings = {
-    theme: localStorage.getItem('theme') as Theme ?? Theme.LIGHT,
-    themeColorOverride: (() => {
-        const color = localStorage.getItem('theme_color_override');
+export const defaultSettings: Settings = {
+    theme: Theme.LIGHT,
+    accentColor: null,
+    fontSize: 1,
+    contrast: 1
+};
 
-        if (!color) {
-            return null;
-        }
+const storedStateJSON = localStorage.getItem('settings');
+const storedSettings: Settings | null = (storedStateJSON && JSON.parse(storedStateJSON)) || null;
 
-        return JSON.parse(color) as Color;
-    })(),
-    fontSizeOverride: (() => {
-        const fontSize = localStorage.getItem('font_size_override');
+const initialState: Settings = storedSettings || defaultSettings;
 
-        if (!fontSize) {
-            return null;
-        }
-
-        return Number.parseFloat(fontSize);
-    })()
+const updateStoredState = (state: Settings) => {
+    localStorage.setItem('settings', JSON.stringify(state));
+};
+const resetStoredState = () => {
+    localStorage.removeItem('settings');
 };
 
 export const settingsSlice = createSlice({
@@ -71,22 +69,28 @@ export const settingsSlice = createSlice({
     initialState,
     reducers: {
         setTheme: (state, { payload }: PayloadAction<Theme>) => {
-            localStorage.setItem('theme', payload);
             state.theme = payload;
+            updateStoredState(state);
         },
-        setThemeColorOverride: (state, { payload }: PayloadAction<Color>) => {
-            if (payload === null) {
-                localStorage.removeItem('theme_color_override');
-            }
-            else {
-                localStorage.setItem('theme_color_override', JSON.stringify(payload));
-            }
+        setAccentColor: (state, { payload }: PayloadAction<Color>) => {
+            state.accentColor = payload;
+            updateStoredState(state);
+        },
+        setFontSize: (state, { payload }: PayloadAction<number>) => {
+            state.fontSize = payload;
+            updateStoredState(state);
+        },
+        setContrast: (state, { payload }: PayloadAction<number>) => {
+            state.contrast = payload;
+            updateStoredState(state);
+        },
+        reset: (state) => {
+            state.theme = defaultSettings.theme;
+            state.accentColor = defaultSettings.accentColor;
+            state.fontSize = defaultSettings.fontSize;
+            state.contrast = defaultSettings.contrast;
 
-            state.themeColorOverride = payload;
-        },
-        setFontSizeOverride: (state, { payload }: PayloadAction<number>) => {
-            localStorage.setItem('font_size_override', payload.toString());
-            state.fontSizeOverride = payload;
+            resetStoredState();
         }
     }
 });

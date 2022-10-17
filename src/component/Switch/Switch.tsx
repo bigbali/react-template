@@ -1,6 +1,12 @@
-import { ChevronIcon } from 'Component/Icon';
-import { Direction } from 'Component/Icon/ChevronIcon/ChevronIcon';
-import React, { useCallback, useState } from 'react';
+import React, {
+    useCallback,
+    useEffect,
+    useState
+} from 'react';
+import {
+    ChevronIcon,
+    Direction
+} from 'Component/Icon';
 import './Switch.style';
 
 interface SwitchProps {
@@ -12,7 +18,7 @@ interface SwitchProps {
     textLeft?: string,
     textRight?: string,
     label?: string,
-    initiallySelectRight?: boolean
+    externalValue?: any
 };
 
 const Switch = ({
@@ -24,17 +30,19 @@ const Switch = ({
     textLeft,
     textRight,
     label,
-    initiallySelectRight = false
+    externalValue = valueLeft
 }: SwitchProps) => {
-    const [value, setValue] = useState<any>(initiallySelectRight
-        ? valueRight
-        : valueLeft);
+    const [value, setValue] = useState<any>(externalValue);
 
     const onClick = useCallback(() => {
         const newValue = value === valueLeft ? valueRight : valueLeft;
         onSwitch(newValue);
         setValue(newValue);
     }, [value]);
+
+    useEffect(() => {
+        setValue(externalValue);
+    }, [externalValue]);
 
     return (
         <button

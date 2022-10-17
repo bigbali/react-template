@@ -78,7 +78,7 @@
 .theme-light {
     --color-background-primary: var(--color-background-primary-light);
     --color-background-primary-transparent: var(--color-background-primary-light-transparent);
-    --color-background-secondary: var(--color-background-primary-secondary);
+    --color-background-secondary: var(--color-background-primary);
     --color-background-secondary-transparent: var(--color-background-secondary-light-transparent);
     --color-content-primary: var(--color-content-primary-light);
     --color-content-primary-transparent: var(--color-content-primary-light-transparent);
@@ -136,7 +136,7 @@ main {
             position: fixed;
             inset: 0;
             background-color: var(--color-background-primary-transparent);
-            backdrop-filter: blur(0.5rem);
+            backdrop-filter: blur(1rem);
             opacity: 0;
         }
 

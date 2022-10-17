@@ -5,6 +5,8 @@ export { default as SettingsIcon } from './SettingsIcon';
 export { default as SunIcon } from './SunIcon';
 export { default as MoonIcon } from './MoonIcon';
 
+export * from './ChevronIcon';
+
 import { default as Base } from './Base';
 import { default as Close } from './CloseIcon';
 import { default as Chevron } from './ChevronIcon';
@@ -12,6 +14,7 @@ import { default as HamburgerMenu } from './HamburgerMenuIcon';
 import { default as Settings } from './SettingsIcon';
 import { default as Sun } from './SunIcon';
 import { default as Moon } from './MoonIcon';
+
 
 const Icon = {
     Base,

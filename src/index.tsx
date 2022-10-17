@@ -69,7 +69,7 @@ const Layout = () => {
     const location = useLocation();
     const [showNotification] = useNotification();
     const { isMobile } = useDevice();
-    const [{ theme, themeColorOverride, fontSizeOverride }] = useSettings();
+    const [{ theme, accentColor, fontSize, contrast }] = useSettings();
     const currentOutlet = useOutlet();
     const { nodeRef } = routes.find(
         (route) => route.path === location.pathname
@@ -92,16 +92,17 @@ const Layout = () => {
             body.classList.replace('theme-light', 'theme-dark') || body.classList.add('theme-dark');
         }
 
-        if (themeColorOverride) {
-            body.style.setProperty('--color-theme', themeColorOverride.value);
+        if (accentColor) {
+            body.style.setProperty('--color-theme', accentColor.value);
         }
         else {
             body.style.removeProperty('--color-theme');
         }
 
-        html.style.fontSize = `${16 * (fontSizeOverride || 1)}px`;
+        html.style.fontSize = `${16 * (fontSize || 1)}px`;
+        html.style.filter = `contrast(${contrast || 1})`;
 
-    }, [theme, themeColorOverride, fontSizeOverride]);
+    }, [theme, accentColor, fontSize, contrast]);
 
     return (
         <>
