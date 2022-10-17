@@ -125,7 +125,7 @@ const Layout = () => {
                         exit: 100
                     }}>
                     {() => (
-                        <main ref={nodeRef} block="Page">
+                        <main ref={nodeRef} block='Page'>
                             {currentOutlet}
                         </main>
                     )}
