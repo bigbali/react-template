@@ -31,8 +31,8 @@ import Notifications, {
     NotificationStatus
 } from 'Component/Notifications';
 import Transition from 'Component/Transition';
-import 'Style/main.scss';
 import Footer from 'Component/Footer';
+import 'Style/main';
 
 const rootElement = document.getElementById('root')!;
 const body = document.querySelector('body')!;
@@ -120,7 +120,7 @@ const Layout = () => {
                     }}
                     key={location.key}
                     nodeRef={nodeRef}
-                    classNames="cross-page"
+                    classNames='cross-page'
                     timeout={{
                         enter: 300,
                         exit: 100

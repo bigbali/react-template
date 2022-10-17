@@ -16,12 +16,12 @@ export const Cookies = () => {
     const tapOrClick = isMobile ? 'Tap' : 'Click';
 
     return (
-        <div block="Cookies">
-            <div elem="Header">
+        <div block='Cookies'>
+            <div elem='Header'>
                 Cookies notice
-                <div elem="Close">
+                <div elem='Close'>
                     <button
-                        elem="CloseButton"
+                        elem='CloseButton'
                         onClick={() => {
                             localStorage.setItem('is_cookies_notice_closed', 'true');
                             setIsClosed(true);
@@ -30,15 +30,15 @@ export const Cookies = () => {
                     </button>
                 </div>
             </div>
-            <div elem="Body">
+            <div elem='Body'>
                 We must inform you that we are using cookies to ensure your experience browsing this page is nothing less than amazing.
                 <br />
                 By continuing to browse this page, you automatically agree to our cookie policy.
                 <br />
                 <Link
-                    elem="CookiePolicy"
-                    to="cookie-policy"
-                    target="_blank"
+                    elem='CookiePolicy'
+                    to='cookie-policy'
+                    target='_blank'
                 >
                     {tapOrClick} here to read about our Cookie Policy.
                 </Link>

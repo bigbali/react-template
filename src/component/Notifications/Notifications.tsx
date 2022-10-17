@@ -9,7 +9,7 @@ import {
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useNotification } from 'Util';
 import { CloseIcon } from 'Component/Icon';
-import './Notifications.style.scss';
+import './Notifications.style';
 
 export enum NotificationStatus {
     INFO = 'INFO',
@@ -52,7 +52,7 @@ export const Notifications = () => {
         return (
             <div
                 key={id}
-                block="Notification"
+                block='Notification'
                 mods={{
                     INFO: status === NotificationStatus.INFO,
                     SUCCESS: status === NotificationStatus.SUCCESS,
@@ -60,16 +60,16 @@ export const Notifications = () => {
                     ERROR: status === NotificationStatus.ERROR
                 }}
             >
-                <div elem="Content">
-                    <h3 elem="Title">
+                <div elem='Content'>
+                    <h3 elem='Title'>
                         {title}
                     </h3>
-                    <p elem="Message">
+                    <p elem='Message'>
                         {message}
                     </p>
                 </div>
                 <button
-                    elem="Close"
+                    elem='Close'
                     onClick={() => {
                         hideNotification(id);
                     }}>
@@ -81,7 +81,7 @@ export const Notifications = () => {
 
     return (
         <div
-            block="NotificationContainer"
+            block='NotificationContainer'
             ref={containerRef}
             mods={{ NO_CONTENT: notificationContext.length === 0 }}
         >

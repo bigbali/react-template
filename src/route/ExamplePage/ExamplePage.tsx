@@ -11,12 +11,12 @@ export const ExamplePage = () => {
     }
 
     return (
-        <main block="ExamplePage" ref={ref}>
-            <div elem="MainContent">
-                <h1 elem="Header">
+        <main block='ExamplePage' ref={ref}>
+            <div elem='MainContent'>
+                <h1 elem='Header'>
                     Your identifier is
                 </h1>
-                <h2 elem="Subheader">
+                <h2 elem='Subheader'>
                     {id}!
                 </h2>
             </div>

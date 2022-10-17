@@ -7,8 +7,8 @@ export const Header = () => {
     const { isDesktop } = useDevice();
 
     return (
-        <div block="Header">
-            <h1 elem="Branding">
+        <div block='Header'>
+            <h1 elem='Branding'>
                 Template
             </h1>
             <Navigation />

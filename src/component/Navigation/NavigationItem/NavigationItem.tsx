@@ -5,7 +5,7 @@ import NavigationLink from '../NavigationLink';
 
 export const NavigationItem = ({ label, name, to }: NavigationItemType) => {
     return (
-        <li block="Navigation-ListItem" key={name}>
+        <li block='Navigation-ListItem' key={name}>
             <NavigationLink
                 to={to}
                 className={({ isActive }) => isActive ? 'active' : ''}
