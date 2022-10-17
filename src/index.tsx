@@ -32,6 +32,7 @@ import Notifications, {
 } from 'Component/Notifications';
 import Transition from 'Component/Transition';
 import 'Style/main.scss';
+import Footer from 'Component/Footer';
 
 const rootElement = document.getElementById('root')!;
 const body = document.querySelector('body')!;
@@ -131,6 +132,7 @@ const Layout = () => {
                     )}
                 </Transition>
             </SwitchTransition>
+            <Footer />
         </>
     );
 };
