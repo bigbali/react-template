@@ -1,20 +1,12 @@
-export { default as CloseIcon } from './CloseIcon';
-export { default as ChevronIcon } from './ChevronIcon';
-export { default as HamburgerMenuIcon } from './HamburgerMenuIcon';
-export { default as SettingsIcon } from './SettingsIcon';
-export { default as SunIcon } from './SunIcon';
-export { default as MoonIcon } from './MoonIcon';
-
-export * from './ChevronIcon';
+export * from './Chevron';
 
 import { default as Base } from './Base';
-import { default as Close } from './CloseIcon';
-import { default as Chevron } from './ChevronIcon';
-import { default as HamburgerMenu } from './HamburgerMenuIcon';
-import { default as Settings } from './SettingsIcon';
-import { default as Sun } from './SunIcon';
-import { default as Moon } from './MoonIcon';
-
+import { default as Close } from './Close';
+import { default as Chevron } from './Chevron';
+import { default as HamburgerMenu } from './HamburgerMenu';
+import { default as Settings } from './Settings';
+import { default as Sun } from './Sun';
+import { default as Moon } from './Moon';
 
 const Icon = {
     Base,

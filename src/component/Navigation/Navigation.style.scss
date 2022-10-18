@@ -11,6 +11,7 @@
 
         @include mobile {
             flex-direction: column;
+            margin-block-end: 1.5rem;
         }
     }
 
@@ -191,6 +192,7 @@
             padding: var(--content-padding);
             background-color: var(--color-background-primary);
             z-index: 999;
+            overflow-y: auto;
 
             &-Exit {
                 display: flex;

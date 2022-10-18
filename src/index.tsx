@@ -120,7 +120,7 @@ const Layout = () => {
                     }}
                     key={location.key}
                     nodeRef={nodeRef}
-                    classNames='cross-page'
+                    classNames="cross-page"
                     timeout={{
                         enter: 300,
                         exit: 100

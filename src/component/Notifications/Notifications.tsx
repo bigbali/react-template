@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useNotification } from 'Util';
-import { CloseIcon } from 'Component/Icon';
+import Icon from 'Component/Icon';
 import './Notifications.style';
 
 export enum NotificationStatus {
@@ -43,7 +43,7 @@ export const Notifications = () => {
     const [notificationContext] = useContext(NotificationContext);
     const [, hideNotification] = useNotification();
     const [containerRef] = useAutoAnimate<HTMLDivElement>({
-        duration: 100
+        duration: 200
     });
 
     // Instead of creating a notification component and mapping that, we map directly
@@ -73,7 +73,7 @@ export const Notifications = () => {
                     onClick={() => {
                         hideNotification(id);
                     }}>
-                    <CloseIcon />
+                    <Icon.Close />
                 </button>
             </div>
         );

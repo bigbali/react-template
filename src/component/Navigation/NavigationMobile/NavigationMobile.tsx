@@ -1,21 +1,19 @@
 import {
     useState,
     useEffect,
-    useRef
+    useRef,
+    memo
 } from 'react';
 import { useLocation } from 'react-router';
 import { TransitionGroup } from 'react-transition-group';
-import {
-    CloseIcon,
-    HamburgerMenuIcon
-} from 'Component/Icon';
-import Transition from 'Component/Transition/Transition';
+import Icon from 'Component/Icon';
+import Transition from 'Component/Transition';
+import Settings from 'Component/Settings';
 import { navigationMap } from '../Navigation';
 import NavigationItem from '../NavigationItem';
 import '../Navigation.style';
-import Settings from 'Component/Settings';
 
-const NavigationMobile = () => {
+const NavigationMobile = memo(() => { // memo prevents unnecessary render which triggers animation
     const [isExpanded, setIsExpanded] = useState(false);
     const location = useLocation();
     const ref = useRef(null);
@@ -60,15 +58,12 @@ const NavigationMobile = () => {
                         </div>
                     </div>
                     <div elem='Mobile-Menu-Exit' onClick={() => setIsExpanded(false)}>
-                        <CloseIcon />
+                        <Icon.Close />
                     </div>
                 </div>
             </Transition>
         )
     );
-
-    // can we get this to work with portal? conditional rendering?
-    // const MenuPortal = createPortal(Menu, document.querySelector('#root')!);
 
     return (
         <TransitionGroup component={null}>
@@ -77,11 +72,11 @@ const NavigationMobile = () => {
                 elem='HamburgerIconWrapper'
                 onClick={() => setIsExpanded((state) => !state)}
             >
-                <HamburgerMenuIcon isExpanded={isExpanded} />
+                <Icon.HamburgerMenu isExpanded={isExpanded} />
             </div>
             {Menu}
         </TransitionGroup>
     );
-};
+});
 
 export default NavigationMobile;

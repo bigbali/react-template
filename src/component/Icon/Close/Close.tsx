@@ -1,7 +1,7 @@
 import type { IconProps } from '../index';
-import './CloseIcon.style';
+import './Close.style';
 
-export const CloseIcon = ({ color }: IconProps) => {
+const Close = ({ color }: IconProps) => {
     return (
         <div block='Icon' elem='Close'>
             <svg
@@ -18,4 +18,4 @@ export const CloseIcon = ({ color }: IconProps) => {
     );
 };
 
-export default CloseIcon;
+export default Close;

@@ -3,8 +3,7 @@ import {
     useEffect,
     useState
 } from 'react';
-import {
-    ChevronIcon,
+import Icon, {
     Direction
 } from 'Component/Icon';
 import './Switch.style';
@@ -74,7 +73,7 @@ const Switch = ({
                         </span>
                     )}
                 </div>
-                <ChevronIcon
+                <Icon.Chevron
                     direction={
                         value === valueRight
                             ? Direction.LEFT

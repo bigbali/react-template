@@ -1,10 +1,11 @@
 import {
     useCallback,
     useMemo,
+    useRef,
     useState
 } from 'react';
 import lodash from 'lodash';
-import { useSettings } from 'Util';
+import { useClickOutside, useSettings } from 'Util';
 import {
     Color,
     DefaultColors,
@@ -12,11 +13,7 @@ import {
 } from 'Store';
 import Switch from 'Component/Switch';
 import Slider from 'Component/Slider';
-import {
-    MoonIcon,
-    SettingsIcon,
-    SunIcon
-} from 'Component/Icon';
+import Icon from 'Component/Icon';
 import './Settings.style';
 
 const ColorMap = [
@@ -27,6 +24,9 @@ const ColorMap = [
 export const SettingsDesktop = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [settings, actions] = useSettings();
+    const ref = useRef(null);
+
+    useClickOutside(ref, (isExpanded) => isExpanded && setIsExpanded(false));
 
     const handleThemeSwitch = (theme: Theme) => {
         actions.setTheme(theme);
@@ -80,11 +80,14 @@ export const SettingsDesktop = () => {
     };
 
     return (
-        <div block='Settings-Desktop' mods={{ isExpanded }}>
+        <div
+            ref={ref}
+            block='Settings-Desktop'
+            mods={{ isExpanded }}>
             <button
                 elem='Expander'
                 onClick={() => setIsExpanded((state) => !state)}>
-                <SettingsIcon isExpanded={isExpanded} />
+                <Icon.Settings isExpanded={isExpanded} />
             </button>
             <div elem='Overlay'>
                 <p elem='SettingsLabel'>
@@ -94,8 +97,8 @@ export const SettingsDesktop = () => {
                     onSwitch={handleThemeSwitch}
                     valueLeft={Theme.LIGHT}
                     valueRight={Theme.DARK}
-                    iconLeft={<SunIcon />}
-                    iconRight={<MoonIcon />}
+                    iconLeft={<Icon.Sun />}
+                    iconRight={<Icon.Moon />}
                     textLeft='Light'
                     textRight='Dark'
                     label='Color Scheme'

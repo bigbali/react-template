@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './ChevronIcon.style';
+import './Chevron.style';
 
 export enum Direction {
     LEFT = 'left',
@@ -12,7 +12,7 @@ export interface ChevronProps {
     direction?: Direction
 }
 
-export const ChevronIcon = ({ direction = Direction.UP, ...props }: SVGProps<SVGSVGElement> & ChevronProps) => {
+export const Chevron = ({ direction = Direction.UP, ...props }: SVGProps<SVGSVGElement> & ChevronProps) => {
     return (
         <div block='Icon' elem='Chevron' mods={{
             DIRECTION_LEFT: direction === Direction.LEFT,
@@ -32,4 +32,4 @@ export const ChevronIcon = ({ direction = Direction.UP, ...props }: SVGProps<SVG
     );
 };
 
-export default ChevronIcon;
+export default Chevron;

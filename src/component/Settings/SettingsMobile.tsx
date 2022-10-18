@@ -8,10 +8,7 @@ import {
 } from 'Store';
 import Switch from 'Component/Switch';
 import Slider from 'Component/Slider';
-import {
-    MoonIcon,
-    SunIcon
-} from 'Component/Icon';
+import Icon from 'Component/Icon';
 import './Settings.style';
 
 const ColorMap = [
@@ -82,8 +79,8 @@ export const SettingsMobile = () => {
                 onSwitch={handleThemeSwitch}
                 valueLeft={Theme.LIGHT}
                 valueRight={Theme.DARK}
-                iconLeft={<SunIcon />}
-                iconRight={<MoonIcon />}
+                iconLeft={<Icon.Sun />}
+                iconRight={<Icon.Moon />}
                 textLeft='Light'
                 textRight='Dark'
                 label='Color Scheme'

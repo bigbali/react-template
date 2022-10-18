@@ -1,7 +1,7 @@
 import { SVGProps } from 'react';
-import './SettingsIcon.style';
+import './Settings.style';
 
-export const SettingsIcon = ({ isExpanded }: SVGProps<SVGSVGElement> & { isExpanded: boolean }) => {
+const Settings = ({ isExpanded }: SVGProps<SVGSVGElement> & { isExpanded: boolean }) => {
     return (
         <div block='Icon' elem='Settings' mods={{ isExpanded }}>
             <svg
@@ -14,4 +14,4 @@ export const SettingsIcon = ({ isExpanded }: SVGProps<SVGSVGElement> & { isExpan
     );
 };
 
-export default SettingsIcon;
+export default Settings;

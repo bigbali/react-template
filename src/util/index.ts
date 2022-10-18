@@ -1,3 +1,4 @@
+export { useClickOutside } from './hook/useClickOutside';
 export { useDevice } from './hook/useDevice';
 export { useNotification } from './hook/useNotification';
 export { useInterval } from './hook/useInterval';

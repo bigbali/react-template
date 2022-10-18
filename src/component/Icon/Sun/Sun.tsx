@@ -1,8 +1,8 @@
 import { SVGProps } from 'react';
-import './SunIcon.style';
+import './Sun.style';
 
 
-export const SunIcon = (props: SVGProps<SVGSVGElement>) => {
+const Sun = (props: SVGProps<SVGSVGElement>) => {
     return (
         <div block='Icon' elem='Moon'>
             <svg
@@ -16,4 +16,4 @@ export const SunIcon = (props: SVGProps<SVGSVGElement>) => {
     );
 };
 
-export default SunIcon;
+export default Sun;

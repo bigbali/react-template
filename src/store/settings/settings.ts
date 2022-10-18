@@ -45,8 +45,10 @@ export interface Settings {
     contrast: number
 }
 
+
+const isOsThemeDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 export const defaultSettings: Settings = {
-    theme: Theme.LIGHT,
+    theme: isOsThemeDark ? Theme.DARK : Theme.LIGHT,
     accentColor: null,
     fontSize: 1,
     contrast: 1
@@ -54,7 +56,6 @@ export const defaultSettings: Settings = {
 
 const storedStateJSON = localStorage.getItem('settings');
 const storedSettings: Settings | null = (storedStateJSON && JSON.parse(storedStateJSON)) || null;
-
 const initialState: Settings = storedSettings || defaultSettings;
 
 const updateStoredState = (state: Settings) => {

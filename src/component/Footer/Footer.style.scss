@@ -16,8 +16,13 @@
         flex: 1;
     }
 
-    &-By {
+    &-By:not(.\9) {
+        // trick to increase specificity
         text-align: start;
+
+        @include mobile {
+            flex: 2;
+        }
     }
 
     &-Date {

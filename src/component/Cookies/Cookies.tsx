@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDevice } from 'Util';
-import { CloseIcon } from 'Component/Icon';
+import Icon from 'Component/Icon';
 import './Cookies.style';
 
 export const Cookies = () => {
@@ -26,7 +26,7 @@ export const Cookies = () => {
                             localStorage.setItem('is_cookies_notice_closed', 'true');
                             setIsClosed(true);
                         }}>
-                        <CloseIcon />
+                        <Icon.Close />
                     </button>
                 </div>
             </div>

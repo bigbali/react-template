@@ -1,8 +1,8 @@
 import { SVGProps } from 'react';
-import './MoonIcon.style';
+import './Moon.style';
 
 
-export const MoonIcon = (props: SVGProps<SVGSVGElement>) => {
+const Moon = (props: SVGProps<SVGSVGElement>) => {
     return (
         <div block='Icon' elem='Moon'>
             <svg
@@ -17,4 +17,4 @@ export const MoonIcon = (props: SVGProps<SVGSVGElement>) => {
     );
 };
 
-export default MoonIcon;
+export default Moon;
