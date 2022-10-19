@@ -9,9 +9,9 @@ import { TransitionGroup } from 'react-transition-group';
 import Icon from 'Component/Icon';
 import Transition from 'Component/Transition';
 import Settings from 'Component/Settings';
-import { navigationMap } from '../Navigation';
-import NavigationItem from '../NavigationItem';
-import '../Navigation.style';
+import NavigationItem from './NavigationItem';
+import { navigationMap } from './';
+import './Navigation.style';
 
 const NavigationMobile = memo(() => { // memo prevents unnecessary render which triggers animation
     const [isExpanded, setIsExpanded] = useState(false);

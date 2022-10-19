@@ -1,7 +1,7 @@
 import {
     NavigationItemType,
-} from '../Navigation';
-import NavigationLink from '../NavigationLink';
+} from './';
+import NavigationLink from './NavigationLink';
 
 export const NavigationItem = ({ label, name, to }: NavigationItemType) => {
     return (

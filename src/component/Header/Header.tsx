@@ -1,5 +1,5 @@
 import { useDevice } from 'Util';
-import Navigation from 'Component/Navigation/Navigation';
+import Navigation from 'Component/Navigation/';
 import Settings from 'Component/Settings';
 import './Header.style';
 
@@ -11,7 +11,9 @@ export const Header = () => {
             <h1 elem='Branding'>
                 Template
             </h1>
-            <Navigation />
+            {isDesktop
+                ? <Navigation.Desktop />
+                : <Navigation.Mobile />}
             {isDesktop && <Settings.Desktop />}
         </div>
     );

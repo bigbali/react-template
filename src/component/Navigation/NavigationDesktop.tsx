@@ -1,5 +1,6 @@
-import { navigationMap } from '../Navigation';
-import NavigationItem from '../NavigationItem';
+import { navigationMap } from './';
+import NavigationItem from './NavigationItem';
+import './Navigation.style';
 
 const NavigationDesktop = () => (
     <nav block='Navigation'>

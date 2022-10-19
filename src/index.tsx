@@ -18,12 +18,6 @@ import {
     useSettings
 } from 'Util';
 import store, { Theme } from 'Store';
-import IndexPage from 'Route/IndexPage';
-import AboutPage from 'Route/AboutPage';
-import ContactPage from 'Route/ContactPage';
-import ErrorPage from 'Route/ErrorPage';
-import NotFoundPage from 'Route/NotFoundPage';
-import ExamplePage from 'Route/ExamplePage';
 import Header from 'Component/Header';
 import Cookies from 'Component/Cookies';
 import Notifications, {
@@ -32,6 +26,7 @@ import Notifications, {
 } from 'Component/Notifications';
 import Transition from 'Component/Transition';
 import Footer from 'Component/Footer';
+import Page from 'Route';
 import 'Style/main';
 
 const rootElement = document.getElementById('root')!;
@@ -41,27 +36,37 @@ const html = document.querySelector('html')!;
 const routes = [
     {
         path: '/',
-        element: <IndexPage />,
+        element: <Page.Index />,
         nodeRef: createRef<any>()
     },
     {
         path: 'about',
-        element: <AboutPage />,
+        element: <Page.About />,
         nodeRef: createRef<any>()
     },
     {
+        path: 'cookie-policy',
+        element: <Page.CookiePolicy />,
+        nodeRef: createRef<any>(),
+    },
+    {
         path: 'contact',
-        element: <ContactPage />,
+        element: <Page.Contact />,
+        nodeRef: createRef<any>(),
+    },
+    {
+        path: 'terms-of-use',
+        element: <Page.TermsOfUse />,
         nodeRef: createRef<any>(),
     },
     {
         path: 'example/:id',
-        element: < ExamplePage />,
+        element: <Page.Example />,
         nodeRef: createRef<any>(),
     },
     {
         path: '*',
-        element: <NotFoundPage />,
+        element: <Page.NotFound />,
         nodeRef: createRef<any>(),
     }
 ];
@@ -142,7 +147,7 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
             { // this is our error boundary
-                errorElement: <ErrorPage />,
+                errorElement: <Page.Error />,
                 children: routes.map(
                     route => ({
                         index: route.path === '/',
