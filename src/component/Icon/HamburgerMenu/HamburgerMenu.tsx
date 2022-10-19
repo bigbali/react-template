@@ -1,7 +1,7 @@
 import type { IconProps } from '../index';
 import './HamburgerMenu.style';
 
-const HamburgerMenu = ({ color, isExpanded }: IconProps & { isExpanded: boolean }) => {
+const HamburgerMenu = ({ color, isExpanded = false }: IconProps & { isExpanded?: boolean }) => {
     return (
         <div block='Icon' elem='HamburgerMenu' mods={{ isExpanded }}>
             <svg

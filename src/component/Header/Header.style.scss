@@ -4,7 +4,7 @@
     position: fixed;
     inset-block-start: 0;
     inset-inline: 0;
-    padding-inline: calc(var(--content-padding) + 1rem);
+    padding-inline: var(--content-padding);
     z-index: 99;
     height: var(--header-height);
 

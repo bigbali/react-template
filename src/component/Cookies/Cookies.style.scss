@@ -7,6 +7,32 @@
     background-color: var(--color-background-primary-dark-transparent-less-transparent);
     backdrop-filter: blur(var(--blur-background));
     z-index: 98;
+    transition: opacity 0.5s;
+
+    &_in {
+        opacity: 0;
+    }
+
+    &_in-active {
+        opacity: 1;
+        transition-delay: 0.2s;
+    }
+
+    &_in-done {
+        opacity: 1;
+    }
+
+    &_exit {
+        opacity: 1;
+    }
+
+    &_exit-active {
+        opacity: 0;
+    }
+
+    &_exit-done {
+        opacity: 0;
+    }
 
     &-Header {
         display: flex;

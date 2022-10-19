@@ -1,7 +1,7 @@
 import { SVGProps } from 'react';
 import './Settings.style';
 
-const Settings = ({ isExpanded }: SVGProps<SVGSVGElement> & { isExpanded: boolean }) => {
+const Settings = ({ isExpanded = false }: SVGProps<SVGSVGElement> & { isExpanded?: boolean }) => {
     return (
         <div block='Icon' elem='Settings' mods={{ isExpanded }}>
             <svg
