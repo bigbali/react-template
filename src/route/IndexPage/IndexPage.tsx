@@ -1,8 +1,17 @@
+import './IndexPage.style';
+
 export const IndexPage = () => {
     return (
-        <main>
-            IndexPage
-        </main>
+        <div block='IndexPage'>
+            <div elem='MainContent'>
+                <h1 elem='Header'>
+                    React Template
+                </h1>
+                <h2 elem='Subheader'>
+                    built with TypeScript
+                </h2>
+            </div>
+        </div>
     );
 };
 

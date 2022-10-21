@@ -1,21 +1,20 @@
-import { combineReducers, createStore } from '@reduxjs/toolkit';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore } from '@reduxjs/toolkit';
+import deviceSlice from './device/device';
+import settingsSlice from './settings/settings';
 
-import DeviceReducer from 'Store/Device/Device.reducer';
-import NotificationReducer from 'Store/Notification/Notification.reducer';
+export * from './device/device';
+export * from './settings/settings';
 
-const reducer = combineReducers({
-    notification: NotificationReducer,
-    device: DeviceReducer
+export const store = configureStore({
+    reducer: {
+        device: deviceSlice.reducer,
+        settings: settingsSlice.reducer
+    },
+    devTools: true,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false // allow callbacks as payload
+    })
 });
-
-/**
- * Use 'createStore' as 'configureStore' incorrectly infers type
- */
-export const store = createStore(
-    reducer,
-    composeWithDevTools()
-);
 
 export default store;
 

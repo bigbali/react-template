@@ -15,9 +15,10 @@
         "es6": true
     },
     "parserOptions": {
-        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "ecmaVersion": 2022,
         "project": [
-            "./tsconfig.json"
+            "eslint.tsconfig.json"
         ]
     },
     "rules": {
@@ -64,9 +65,11 @@
         //     }
         // ],
         "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-extra-semi": "off",
+        "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/semi": "error",
-        "@typescript-eslint/no-extra-semi": 0,
         "@typescript-eslint/naming-convention": [
             "error",
             {
@@ -85,10 +88,11 @@
                     "PascalCase"
                 ],
                 "custom": {
-                    "regex": "^I[A-Z]",
+                    "regex": "^I?[A-Z]",
                     "match": true
                 }
             }
-        ]
+        ],
+        "@typescript-eslint/no-unsafe-assignment": "off"
     }
 }

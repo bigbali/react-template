@@ -1,29 +1,20 @@
-import { useDispatch } from 'react-redux';
-import Navigation from 'Component/Navigation/Navigation';
-import { showNotification } from 'Store/Notification/Notification.action';
-import { useDevice } from 'Util/Device';
-
+import { useDevice } from 'Util';
+import Navigation from 'Component/Navigation/';
+import Settings from 'Component/Settings';
 import './Header.style';
 
 export const Header = () => {
-    const { isMobile } = useDevice();
-    const dispatch = useDispatch();
-
-    const label = isMobile ? 'React Template: mobile' : 'React Template: desktop';
+    const { isDesktop } = useDevice();
 
     return (
-        // @ts-ignore
-        <div block="Header" onClick={() => {
-            dispatch(showNotification({
-                timeout: 5000,
-                message: 'You just clicked on the header',
-            }));
-        }}>
-            {/* @ts-ignore */}
-            <h1 elem="Branding">
-                {label}
+        <div block='Header'>
+            <h1 elem='Branding'>
+                Template
             </h1>
-            <Navigation />
+            {isDesktop
+                ? <Navigation.Desktop />
+                : <Navigation.Mobile />}
+            {isDesktop && <Settings.Desktop />}
         </div>
     );
 };

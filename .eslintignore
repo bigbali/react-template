@@ -1,4 +1,6 @@
 node_modules
 dist
 public
-craco.config.js
+*.config.js
+*.json
+

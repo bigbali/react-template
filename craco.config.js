@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     style: {
@@ -20,7 +21,7 @@ module.exports = {
         configure: webpackConfig => { // Remove the need for '.scss' when importing styles
             webpackConfig.resolve.extensions.push('.scss');
             return webpackConfig;
-        },
+        }
     },
     babel: { // babel-loader configuration
         loaderOptions: (options) => {
